@@ -1,47 +1,71 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://img.freepik.com/free-photo/business-man-financial-inspector-secretary-making-report-calculating-checking-balance-internal-revenue-service-inspector-checking-document-audit-concept_1423-126.jpg');
+            /* Replace this URL with your image */
+            background-size: cover;
+            background-position: center;
+        }
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+        .ghjkl {
+            background-color: rgba(7, 5, 5, 0.5);
+            height: 100%;
+        }
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        .container {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.8);
+            /* Adding some transparency to make text readable */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ghjkl">
+        <div class="container">
+            <div class="card col-lg-3">
+                <h2 class="text-center mb-4">Login</h2>
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
+                    <div class="py-3">
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" class="form-control" name="email" id="email"
+                            placeholder="Enter email">
+                    </div>
+                    <div class="pb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" name="password" id="password"
+                            placeholder="Password">
+                    </div>
+                    {{-- <div class="pb-3">
+                        <a href="{{ route('password.request') }}" style="text-decoration: none;"><span class="text-primary" style="font-weight:5px !important;">Forgot your password</span></a>
+                    </div> --}}
+                    <div class="py-2" style="text-align: center;">
+                        <button type="submit" class="btn btn-primary form-control">Submit</button>
+                    </div>
+                </form>
+            </div>
         </div>
+    </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+</html>

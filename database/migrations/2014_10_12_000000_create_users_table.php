@@ -26,6 +26,8 @@ return new class extends Migration
             $table->foreign('zipcode_state_cities_id')->references('id')->on('zipcode_state_cities')->onDelete('cascade');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('photo')->nullable()->comment('user profile photo');
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->rememberToken();
             $table->timestamps();
         });

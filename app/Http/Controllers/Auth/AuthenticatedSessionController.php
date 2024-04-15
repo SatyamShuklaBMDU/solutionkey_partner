@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
@@ -22,12 +24,29 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(Request $request)
     {
-        $credentials = $request->only('email', 'password');
-        if (auth()->guard('admins')->attempt($credentials)) {
-            // dd($credentials);
-            return redirect()->intended('/dashboard');
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $admin = Admin::where('email', $request->email)->first();
+
+        if (!$admin) {
+            return back()->withErrors(['email' => 'These credentials do not match our records.']);
         }
-        return back()->withErrors(['email' => trans('auth.failed')])->withInput($request->only('email', 'remember'));
+
+        if ($admin->status == 0) {
+            return back()->withErrors(['email' => 'Your account is not active.']);
+        }
+
+        if (Hash::check($request->password, $admin->password)) {
+            // dd('1');
+            auth()->guard('admins')->login($admin);
+            $request->session()->regenerate();
+            return redirect('/dashboard');
+        }
+
+        return back()->withErrors(['email' => 'These credentials do not match our records.']);
     }
 
     /**
