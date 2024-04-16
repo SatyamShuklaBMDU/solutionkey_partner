@@ -13,7 +13,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="s-sidebar__nav-link" href="">
+                            <a class="s-sidebar__nav-link" href="{{route('add.user.master.show')}}">
                                 <i class="fa-solid fa-user text-warning"></i><em class="text-white">User Profile</em>
                             </a>
                         </li>
