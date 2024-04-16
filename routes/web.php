@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectDocumentController;
+use App\Http\Controllers\ProjectTechnicalController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +41,12 @@ Route::middleware('authenticate_both')->group(function () {
     Route::get('/add-admin', [AdminController::class,'index'])->name('admin.index');
     Route::get('/all-admin', [AdminController::class,'showadmin'])->name('admin.all.index');
     Route::post('/add-admin', [AdminController::class, 'store']);
+
+    // Project Document
+    Route::get('project-document', [ProjectDocumentController::class,'index'])->name('project-document');
+
+    // Project Technical
+    Route::get('project-technical', [ProjectTechnicalController::class, 'index'])->name('project-technical.index');
 });
 
 Route::get('logout-user',function(){
