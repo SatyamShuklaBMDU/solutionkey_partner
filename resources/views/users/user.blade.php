@@ -68,53 +68,52 @@
 @endsection
 @section('content')
     <main class="s-layout__content mt-5">
-        <div class="col-md-9">
-            <div>
-                <h4 class="py-2">Client Profile</h4>
-            </div>
-            <div class="py-3">
-                <div class="container mt-4">
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <form action="{{ route('filter-user') }}" method="post">
-                                <div class="row justify-content-start">
-                                    @csrf
-                                    <div class="col-md-4">
-                                        <label for="datepicker1">From Date:</label>
-                                        <input id="datepicker1" width="250" value="{{ $start ?? '' }}" name="start" />
-                                        @if ($errors->has('start'))
-                                            <div class="text-danger">
-                                                <strong>{{ $errors->first('start') }}</strong>
-                                            </div>
-                                        @endif
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="datepicker2">To Date:</label>
-                                        <input id="datepicker2" width="250" value="{{ $end ?? '' }}" name="end" />
-                                        @if ($errors->has('end'))
-                                            <div class="text-danger">
-                                                <strong>{{ $errors->first('end') }}</strong>
-                                            </div>
-                                        @endif
-                                    </div>
-                                    <div class="col-md-4 mt-4 d-flex">
-                                        <div>
-                                            <label for=""></label>
-                                            <button class="btn btn-success"
-                                                style="border: 0px 9px; font-size:12px;">Filter</button>
+        <div>
+            <h4 class="py-2">Client Profile</h4>
+        </div>
+        <div class="py-3">
+            <div class="container mt-4">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <form action="{{ route('filter-user') }}" method="post">
+                            <div class="row justify-content-start">
+                                @csrf
+                                <div class="col-md-4">
+                                    <label for="datepicker1">From Date:</label>
+                                    <input id="datepicker1" width="250" value="{{ $start ?? '' }}" name="start" />
+                                    @if ($errors->has('start'))
+                                        <div class="text-danger">
+                                            <strong>{{ $errors->first('start') }}</strong>
                                         </div>
-                                        <div>
-                                            <label for=""></label>
-                                            <a class="btn btn-success" href="{{ url('users') }}"
-                                                style="border: 0px 9px; font-size:12px; margin-left: 10px;">Reset</a>
+                                    @endif
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="datepicker2">To Date:</label>
+                                    <input id="datepicker2" width="250" value="{{ $end ?? '' }}" name="end" />
+                                    @if ($errors->has('end'))
+                                        <div class="text-danger">
+                                            <strong>{{ $errors->first('end') }}</strong>
                                         </div>
+                                    @endif
+                                </div>
+                                <div class="col-md-4 mt-4 d-flex">
+                                    <div>
+                                        <label for=""></label>
+                                        <button class="btn btn-success"
+                                            style="border: 0px 9px; font-size:12px;">Filter</button>
+                                    </div>
+                                    <div>
+                                        <label for=""></label>
+                                        <a class="btn btn-success" href="{{ url('users') }}"
+                                            style="border: 0px 9px; font-size:12px; margin-left: 10px;">Reset</a>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="d-flex justify-content-end mt-4">
-                                {{-- <div class="row d-flex justify-content-end px-4">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="d-flex justify-content-end mt-4">
+                            {{-- <div class="row d-flex justify-content-end px-4">
                                 <div>
                                     <button id="openModalBtn" class="btn btn-success" style="font-size: 10px;">Add
                                         Client</button>
@@ -170,96 +169,92 @@
                                     </div>
                                 </div>
                             </div> --}}
-                                <div class="">
-                                    <button id="uploadBtn" class="btn btn-success"
-                                        style="font-size: 15px; font-weight: 400; font-size: 10px;">Upload</button>
-                                </div>
+                            <div class="">
+                                <button id="uploadBtn" class="btn btn-success"
+                                    style="font-size: 15px; font-weight: 400; font-size: 10px;">Upload</button>
                             </div>
                         </div>
+                    </div>
 
-                        <div id="popup" class="popup">
-                            <div class="popup-content">
-                                <form action="/action_page.php">
-                                    <div class="py-8">
-                                        <label for="default"
-                                            class="block text-sm leading-5 font-medium text-gray-700 mb-4">Choose Excel
-                                            File</label>
-                                        <input type="file" name="default" id="default" class="border p-2">
-                                    </div>
-                                </form>
-                                <div class="d-flex justify-content-end mt-4">
-                                    <button id="closePopupBtn" style="font-size: 10px;"
-                                        class="btn btn-success">Close</button>
-                                    <button class="btn btn-success"
-                                        style="font-size: 10px; margin-left: 9px;">sumbit</button>
+                    <div id="popup" class="popup">
+                        <div class="popup-content">
+                            <form action="/action_page.php">
+                                <div class="py-8">
+                                    <label for="default"
+                                        class="block text-sm leading-5 font-medium text-gray-700 mb-4">Choose Excel
+                                        File</label>
+                                    <input type="file" name="default" id="default" class="border p-2">
                                 </div>
+                            </form>
+                            <div class="d-flex justify-content-end mt-4">
+                                <button id="closePopupBtn" style="font-size: 10px;" class="btn btn-success">Close</button>
+                                <button class="btn btn-success" style="font-size: 10px; margin-left: 9px;">sumbit</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="py-3 col-lg-12 data_table table-responsive">
-                    <table id="example" class="table table-bordered table-striped" style="overflow-x: scroll;">
-                        <thead>
-                            <tr>
-                                <td>S.No</td>
-                                <th>Profile</th>
-                                <th>Name</th>
-                                <th>CIN NO.</th>
-                                <th>Registration Date</th>
-                                <th>Updation Date</th>
-                                <th>Phone No.</th>
-                                <th>Whatsapp No.</th>
-                                <th>Email</th>
-                                <th style="width: 900px;">Address</th>
-                                <th>PIN Code</th>
-                                <th>City</th>
-                                <th>State</th>
-                                <th>Company Name</th>
-                                <th>GST ID</th>
-                                <th>Status</th>
-                                <th>Action</th>
+            </div>
+            <div class="py-3 col-lg-12 data_table table-responsive">
+                <table id="example" class="table table-bordered table-striped" style="overflow-x: scroll;">
+                    <thead>
+                        <tr>
+                            <td>S.No</td>
+                            <th>Profile</th>
+                            <th>Name</th>
+                            <th>CIN NO.</th>
+                            <th>Registration Date</th>
+                            <th>Updation Date</th>
+                            <th>Phone No.</th>
+                            <th>Whatsapp No.</th>
+                            <th>Email</th>
+                            <th style="width: 900px;">Address</th>
+                            <th>PIN Code</th>
+                            <th>City</th>
+                            <th>State</th>
+                            <th>Company Name</th>
+                            <th>GST ID</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($users as $user)
+                            <tr data-user-id="{{ $user->id }}">
+                                <td>{{ $loop->iteration }}</td>
+                                <td>
+                                    <img src="{{ asset($user->photo) }}" alt="Not Available"
+                                        style="width:50px;height:50px;">
+                                </td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->cin_no }}</td>
+                                <td>{{ date('d-m-Y', strtotime($user->created_at)) }}</td>
+                                <td>{{ date('d-m-Y', strtotime($user->updated_at)) }}</td>
+                                <td>{{ $user->phone_number }}</td>
+                                <td>{{ $user->whatsapp_number }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->address }}</td>
+                                <td>{{ $user->pincode }}</td>
+                                <td>{{ $user->city }}</td>
+                                <td>{{ $user->state }}</td>
+                                <td>{{ $user->company_name }}</td>
+                                <td>{{ $user->gst_id }}</td>
+                                <td>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" role="switch"
+                                            id="flexSwitchCheckChecked{{ $loop->iteration }}"
+                                            {{ $user->status == 'active' ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="flexSwitchCheckChecked{{ $loop->iteration }}"
+                                            id="labelText">Deactivate</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    {{-- <i class="fa-solid fa-pen-to-square text-success" id="ModalBtn"></i> --}}
+                                    <i class="fa-solid fa-trash text-danger px-2 deleteit"></i>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($users as $user)
-                                <tr data-user-id="{{ $user->id }}">
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>
-                                        <img src="{{ asset($user->photo) }}" alt="Not Available"
-                                            style="width:50px;height:50px;">
-                                    </td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->cin_no }}</td>
-                                    <td>{{ date('d-m-Y', strtotime($user->created_at)) }}</td>
-                                    <td>{{ date('d-m-Y', strtotime($user->updated_at)) }}</td>
-                                    <td>{{ $user->phone_number }}</td>
-                                    <td>{{ $user->whatsapp_number }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>{{ $user->address }}</td>
-                                    <td>{{ $user->pincode }}</td>
-                                    <td>{{ $user->city }}</td>
-                                    <td>{{ $user->state }}</td>
-                                    <td>{{ $user->company_name }}</td>
-                                    <td>{{ $user->gst_id }}</td>
-                                    <td>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" role="switch"
-                                                id="flexSwitchCheckChecked{{ $loop->iteration }}"
-                                                {{ $user->status == 'active' ? 'checked' : '' }}>
-                                            <label class="form-check-label"
-                                                for="flexSwitchCheckChecked{{ $loop->iteration }}"
-                                                id="labelText">Deactivate</label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        {{-- <i class="fa-solid fa-pen-to-square text-success" id="ModalBtn"></i> --}}
-                                        <i class="fa-solid fa-trash text-danger px-2 deleteit"></i>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </main>
@@ -471,7 +466,7 @@
                                     'success'
                                 );
                                 // Remove the row from the table
-                                $(this).closest('tr').remove();
+                                location.reload();
                             },
                             error: function(xhr, status, error) {
                                 console.error('Error deleting user:', error);

@@ -51,7 +51,12 @@ Route::middleware('authenticate_both')->group(function () {
 
     // User Master ROute
     Route::get('add-user-master', [UserManagerController::class,'index'])->name('add.user.master.index');
+    Route::post('add-user-master', [UserManagerController::class,'store'])->name('add.user.master.store');
+    Route::get('edit-user-master/{id}', [UserManagerController::class,'edit'])->name('edit.user.master');
     Route::get('all-user-master', [UserManagerController::class,'show'])->name('add.user.master.show');
+    Route::post('/updateUserMasterStatus', [UserManagerController::class, 'changeStatus']);
+    Route::post('/update-user-master/{id}', [UserManagerController::class, 'update'])->name('update-user-master');
+    Route::post('/deleteUserMaster', [UserManagerController::class, 'destroy']);
 });
 
 Route::get('logout-user',function(){

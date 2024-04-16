@@ -14,15 +14,13 @@
 <body>
     {{-- Header --}}
     @include('include.header')
+    
+    {{-- Sidebar --}}
+    @include('include.sidebar')
+    
     <div class="container-fluid">
-        <div class="row">
-
-            {{-- Sidebar --}}
-            @include('include.sidebar')
-
             {{-- Content --}}
             @yield('content')
-        </div>
     </div>
     {{-- Footer --}}
     <script src="{{ asset('js/navbar.js') }}"></script>

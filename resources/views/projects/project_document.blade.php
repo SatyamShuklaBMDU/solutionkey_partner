@@ -106,6 +106,9 @@
 @endsection
 @section('content')
 <main class="s-layout__content px-4 border mt-3">
+    <div class="py-2">
+        <h2><u>Project Document</u></h2>
+    </div>
     <div class="row">
         <div class="col-lg-6">
             <label for="">Document_ID :</label>

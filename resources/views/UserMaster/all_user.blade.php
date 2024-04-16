@@ -44,52 +44,66 @@
     </style>
 @endsection
 @section('content')
-    <div class="col-md-9">
-        <main class="sarthi-layout__content mt-5">
-            <div class="d-flex row">
-                <div class="py-3 col-md-6">
-                    <h4>User Master</h4>
-                </div>
-                <div class="py-3 col-md-6">
-                    <a href="{{ route('add.user.master.index') }}" class="btn btn-primary float-end">Add User Master</a>
-                </div>
+    <main class="s-layout__content mt-5">
+        <div class="d-flex row">
+            <div class="py-3 col-md-6">
+                <h4>User Master</h4>
             </div>
-            <div class="data_table">
-                <table id="example" class="table table-bordered table-striped" style="width:100%">
-                    <thead>
-                        <tr>
-                            <td>S.No</td>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Role</th>
-                            <th>Status</th>
-                            <th>Action</th>
+            <div class="py-3 col-md-6">
+                <a href="{{ route('add.user.master.index') }}" class="btn btn-primary float-end">Add User Master</a>
+            </div>
+        </div>
+        @if (session('success'))
+            <div class="alert alert-success" style="color: green;">
+                {{ session('success') }}
+            </div>
+        @endif
+        <div class="data_table">
+            <table id="example" class="table table-bordered table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <td>S.No</td>
+                        <td>Created Time</td>
+                        <td>Updated Time</td>
+                        <th>Photo</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($users as $user)
+                        <tr data-user-id="{{ $user->id }}">
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $user->created_at->format('d-m-Y H:i:s') }}</td>
+                            <td>{{ $user->updated_at->format('d-m-Y H:i:s') }}</td>
+                            <td>
+                                <img src="{{ asset($user->photo) }}" alt="Not" style="height: 50px;width:50px;">
+                            </td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>{{ $user->phone_number }}</td>
+                            <td>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch"
+                                        id="flexSwitchCheckChecked{{ $loop->iteration }}"
+                                        {{ $user->status == 'active' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="flexSwitchCheckChecked{{ $loop->iteration }}"
+                                        id="labelText"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <a href="{{route('edit.user.master',encrypt($user->id))}}"><i class="fa-solid fa-pen-to-square text-success"></i></a>
+                                <i class="fa-solid fa-trash text-danger px-2 deleteit"></i>
+                            </td>
                         </tr>
-                    </thead>
-                    {{-- <tbody>
-            @foreach ($admins as $admin)
-          <tr data-user-id="{{ $admin->id }}">
-            <td>{{$loop->iteration}}</td>
-            <td>{{$admin->name}}</td>
-            <td>{{$admin->email}}</td>
-            <td>{{$admin->role}}</td>
-            <td>
-              <label class="switch m5 d-flex">
-                <input type="checkbox" {{$admin->status == '1' ? 'checked' : ''}}>
-                <small style="margin-top: 5px;"></small>
-              </label>
-            </td>
-            <td>
-              <i class="fa-solid fa-pen-to-square"></i>
-              <i class="fa-solid fa-trash text-danger deleteit"></i>
-            </td>
-          </tr>
-          @endforeach
-        </tbody> --}}
-                </table>
-            </div>
-        </main>
-    </div>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </main>
 @endsection
 @section('script-area')
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
@@ -120,11 +134,11 @@
                 var userId = $(this).closest('tr').data('user-id');
                 // alert(userId);
                 const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-                var status = this.checked ? '1' : '0';
+                var status = this.checked ? 'active' : 'inactive';
                 // alert(status);
                 $.ajax({
                     type: 'POST',
-                    url: "{{ url('/updateAdminStatus') }}",
+                    url: "{{ url('/updateUserMasterStatus') }}",
                     headers: {
                         'X-CSRF-TOKEN': csrfToken // Include CSRF token in the headers
                     },
@@ -167,7 +181,7 @@
                             .getAttribute('content');
                         $.ajax({
                             type: 'POST',
-                            url: "{{ url('/deleteAdmin') }}",
+                            url: "{{ url('/deleteUserMaster') }}",
                             headers: {
                                 'X-CSRF-TOKEN': csrfToken
                             },
@@ -190,6 +204,36 @@
                     }
                 });
             });
+        });
+    </script>
+    <script>
+        const checkboxes = document.querySelectorAll('.form-check-input');
+
+        checkboxes.forEach((checkbox) => {
+            checkbox.addEventListener('change', function() {
+                const labelText = this.nextElementSibling; // Get the label element next to the checkbox
+                if (this.checked) {
+                    labelText.innerText = 'Active';
+                    labelText.classList.add('active');
+                    labelText.classList.remove('inactive');
+                } else {
+                    labelText.innerText = 'Deactivate';
+                    labelText.classList.add('inactive');
+                    labelText.classList.remove('active');
+                }
+            });
+
+            // Update initial state on page load
+            const labelText = checkbox.nextElementSibling;
+            if (checkbox.checked) {
+                labelText.innerText = 'Active';
+                labelText.classList.add('active');
+                labelText.classList.remove('inactive');
+            } else {
+                labelText.innerText = 'Deactivate';
+                labelText.classList.add('inactive');
+                labelText.classList.remove('active');
+            }
         });
     </script>
 @endsection

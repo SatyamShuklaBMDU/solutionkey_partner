@@ -47,7 +47,7 @@
                                     <p class="px-2">Role Manager</p>
                                 </label>
                             </div>
-                            <div class="col-lg-3">
+                            {{-- <div class="col-lg-3">
                                 <label class="switch m5 d-flex">
                                     <input type="checkbox" name="permission[]" value="history">
                                     <small style="margin-top: 5px;"></small>
@@ -67,7 +67,7 @@
                                     <small style="margin-top: 5px;"></small>
                                     <p class="px-2">Complaint</p>
                                 </label>
-                            </div>
+                            </div> --}}
                             <div class="col-lg-3">
                                 <label class="switch m5 d-flex">
                                     <input type="checkbox" name="permission[]" value="payment_history">
@@ -75,18 +75,11 @@
                                     <p class="px-2">Payment History</p>
                                 </label>
                             </div>
-                            <div class="col-lg-3">
+                            {{-- <div class="col-lg-3">
                                 <label class="switch m5 d-flex">
                                     <input type="checkbox" name="permission[]" value="bill">
                                     <small style="margin-top: 5px;"></small>
                                     <p class="px-2">Bill</p>
-                                </label>
-                            </div>
-                            <div class="col-lg-3">
-                                <label class="switch m5 d-flex">
-                                    <input type="checkbox" name="permission[]" value="manage_admin">
-                                    <small style="margin-top: 5px;"></small>
-                                    <p class="px-2">Manage Admin</p>
                                 </label>
                             </div>
                             <div class="col-lg-3">
@@ -102,7 +95,7 @@
                                     <small style="margin-top: 5px;"></small>
                                     <p class="px-2">Call Log</p>
                                 </label>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="row">
