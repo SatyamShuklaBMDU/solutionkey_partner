@@ -12,11 +12,14 @@
                                 <i class="fa fa-tachometer text-warning"></i><em class="text-white">Dashbord</em>
                             </a>
                         </li>
+                        @if(auth()->check() && auth()->admin()->hasPermission('cleint_profile'))
                         <li>
                             <a class="s-sidebar__nav-link" href="">
                                 <i class="fa-solid fa-user text-warning"></i><em class="text-white">User Profile</em>
                             </a>
                         </li>
+                        @endif
+                        {{-- @if(auth()->check() && auth()->admin()->hasPermission('role_manager')) --}}
                         <li class=" dropdown-btn position-relative">
                             <a class="s-sidebar__nav-link d-flex justify-content-between">
 
@@ -39,6 +42,8 @@
                                 </a>
                             </li>
                         </div>
+                        {{-- @endif --}}
+                        @if(auth()->check() && auth()->admin()->hasPermission('client_profile'))
                         <li>
                             <a class="s-sidebar__nav-link" href="{{ route('user.index') }}">
                                 <i class="fa fa-users  text-warning" aria-hidden="true"></i><em
@@ -46,6 +51,7 @@
                                     Profile Master</em>
                             </a>
                         </li>
+                        @endif
                         <!-- html  start-->
                         <li>
                             <a class="s-sidebar__nav-link" href="client-profile.html">

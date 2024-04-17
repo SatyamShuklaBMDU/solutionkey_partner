@@ -10,25 +10,40 @@
                     @csrf
                     <div class="row">
                         <div class="col-lg-6">
-                            <input type="text" name="name" id="txtName" placeholder="Name" class="w-100 p-1"/>
+                            <input type="text" name="name" id="txtName" placeholder="Name" class="w-100 p-1" value="{{ old('name') }}"/>
+                            @error('name')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-lg-6">
-                            <input type="text" name="email" id="txtAge" placeholder="Email" class="w-100 p-1"/>
+                            <input type="email" name="email" id="txtAge" placeholder="Email" class="w-100 p-1" value="{{ old('email') }}"/>
+                            @error('email')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
                             <input type="password" name="password" id="txtEmail" placeholder="Create Password"
                                 class="w-100 p-1" />
+                            @error('password')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-lg-6">
-                            <input type="text" name="role" id="txtPhone" placeholder="Role" class="w-100 p-1" />
+                            <input type="text" name="role" id="txtPhone" placeholder="Role" class="w-100 p-1" value="{{ old('role') }}" />
+                            @error('role')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
                             <input type="number" name="mobile_no" id="number" placeholder="Phone Number"
-                                class="w-100 p-1" />
+                                class="w-100 p-1" value="{{ old('mobile_no') }}" />
+                            @error('mobile_no')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="py-4">

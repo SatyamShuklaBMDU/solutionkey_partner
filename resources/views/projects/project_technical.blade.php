@@ -142,32 +142,32 @@
                 <div class="col-lg-6">
                     <label for="">Panel Type:</label>
                     <div class="radio-container px-3">
-                        <input type="radio" id="monoPercHalfCut" name="property-type" value="Residential">
+                        <input type="radio" id="monoPercHalfCut" name="property-type1" value="Residential">
                         <label for="monoPercHalfCut" class=" fw-normal radio-label">Mono-PERC Half Cut</label>
 
-                        <input type="radio" id="mono" name="property-type" value="Commercial">
+                        <input type="radio" id="mono" name="property-type1" value="Commercial">
                         <label for="mono" class=" fw-normal radio-label">Mono Perc Bifacial</label>
 
-                        <input type="radio" id="topCon" name="property-type" value="Industrial">
+                        <input type="radio" id="topCon" name="property-type1" value="Industrial">
                         <label for="topCon" class=" fw-normal radio-label">TopCon</label>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <label for="">Panel Make:</label>
                     <div class="radio-container px-3">
-                        <input type="radio" id="adani" name="property-type" value="Residential">
+                        <input type="radio" id="adani" name="property-type21" value="Residential">
                         <label for="adani" class=" fw-normal radio-label">Adani</label>
 
-                        <input type="radio" id="gautam" name="property-type" value="Commercial">
+                        <input type="radio" id="gautam" name="property-type22" value="Commercial">
                         <label for="gautam" class=" fw-normal radio-label">Gautam</label>
 
-                        <input type="radio" id="Vikram" name="property-type" value="Commercial">
+                        <input type="radio" id="Vikram" name="property-type23" value="Commercial">
                         <label for="Vikram" class=" fw-normal radio-label">Vikram</label>
 
-                        <input type="radio" id="loom" name="property-type" value="Industrial">
+                        <input type="radio" id="loom" name="property-type24" value="Industrial">
                         <label for="loom" class=" fw-normal radio-label"> Loom</label>
 
-                        <input type="radio" id="Saatvik" name="property-type" value="Industrial">
+                        <input type="radio" id="Saatvik" name="property-type25" value="Industrial">
                         <label for="Saatvik" class=" fw-normal radio-label">Saatvik</label>
                     </div>
                 </div>
@@ -218,35 +218,35 @@
                 <div class="col-lg-6">
                     <label for="">Cable Make:</label>
                     <div class="radio-container px-3">
-                        <input type="radio" id="Polycab" name="property-type" value="Residential">
+                        <input type="radio" id="Polycab" name="property-type30" value="Residential">
                         <label for="Polycab" class=" fw-normal radio-label">Polycab</label>
 
-                        <input type="radio" id="KEI" name="property-type" value="Commercial">
+                        <input type="radio" id="KEI" name="property-type32" value="Commercial">
                         <label for="KEI" class=" fw-normal radio-label"> KEI</label>
 
-                        <input type="radio" id="Finolex" name="property-type" value="Commercial">
+                        <input type="radio" id="Finolex" name="property-type33" value="Commercial">
                         <label for="Finolex" class=" fw-normal radio-label">Finolex</label>
 
-                        <input type="radio" id="Others" name="property-type" value="Industrial">
+                        <input type="radio" id="Others" name="property-type34" value="Industrial">
                         <label for="Others" class=" fw-normal radio-label">Others</label>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <label for="">Inverter Make:</label>
                     <div class="radio-container px-3">
-                        <input type="radio" id="KSolare" name="property-type" value="Residential">
+                        <input type="radio" id="KSolare" name="property-type40" value="Residential">
                         <label for="KSolare" class=" fw-normal radio-label">KSolare</label>
 
-                        <input type="radio" id="Growatt" name="property-type" value="Commercial">
+                        <input type="radio" id="Growatt" name="property-type41" value="Commercial">
                         <label for="Growatt" class=" fw-normal radio-label">Growatt</label>
 
-                        <input type="radio" id="Polycab1" name="property-type" value="Commercial">
+                        <input type="radio" id="Polycab1" name="property-type42" value="Commercial">
                         <label for="Polycab1" class=" fw-normal radio-label">Polycab</label>
 
-                        <input type="radio" id="Luminious" name="property-type" value="Commercial">
+                        <input type="radio" id="Luminious" name="property-type43" value="Commercial">
                         <label for="Luminious" class=" fw-normal radio-label">Luminious</label>
 
-                        <input type="radio" id="Others1" name="property-type" value="Industrial">
+                        <input type="radio" id="Others1" name="property-type45" value="Industrial">
                         <label for="Others1" class=" fw-normal radio-label">Others</label>
                     </div>
                 </div>
