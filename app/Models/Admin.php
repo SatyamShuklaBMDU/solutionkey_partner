@@ -13,10 +13,11 @@ class Admin extends Model implements Authenticatable
     use AuthenticatableTrait;
     use HasFactory;
     protected $guarded=[];
+    protected $guard = 'admins';
     protected $casts = [
         'password' => 'hashed',
+        // 'permissions' => 'array'
     ];
-
     public function hasPermission($permission)
     {
         // dd($permission);

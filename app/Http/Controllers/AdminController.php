@@ -48,7 +48,8 @@ class AdminController extends Controller
             'password' => 'required|min:6',
             'role' => 'required',
             'permission' => 'required|array',
-            'mobile_no' => 'required',
+            // 'mobile_no' => 'required|numeric|digits:10|unique:admins,mobile_no,'.$id,
+            'mobile_no' => 'required|numeric|digits:10|unique:admins'
         ]);
         $admin = new Admin();
         $admin->name = $request->input('name');
@@ -59,5 +60,31 @@ class AdminController extends Controller
         $admin->mobile_no = $request->input('mobile_no');
         $admin->save();
         return redirect('/all-admin')->with('message','Admin created successfully');
+    }
+    public function editAdmin($id)
+    {
+        $id = $id ? decrypt($id) : "";
+        $admin = Admin::findOrFail($id);
+        return view('admin.edit_admin',compact('admin'));
+    }
+    public function update_admin($id, Request $request)
+    {
+        $id = $id ? decrypt($id) : "";
+        // dd($request->all());
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:admins,email,'.$id,
+            'role' => 'required',
+            'permission' => 'required|array',
+            'mobile_no' => 'required|numeric|digits:10|unique:admins,mobile_no,'.$id,
+        ]);
+        $admin = Admin::findOrFail($id);
+        $admin->name = $request->input('name');
+        $admin->email = $request->input('email');
+        $admin->role = $request->input('role');
+        $admin->permission = json_encode($request->input('permission'));
+        $admin->mobile_no = $request->input('mobile_no');
+        $admin->save();
+        return redirect('/all-admin')->with('message',' Updated successfully');
     }
 }

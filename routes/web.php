@@ -42,6 +42,8 @@ Route::middleware('authenticate_both')->group(function () {
     Route::get('/add-admin', [AdminController::class,'index'])->name('admin.index');
     Route::get('/all-admin', [AdminController::class,'showadmin'])->name('admin.all.index');
     Route::post('/add-admin', [AdminController::class, 'store']);
+    Route::get('/edit-admin/{id}', [AdminController::class, 'editAdmin']);
+    Route::put('/update-admin/{id}', [AdminController::class, 'update_admin']);
 
     // Project Document
     Route::get('project-document', [ProjectDocumentController::class,'index'])->name('project-document');
