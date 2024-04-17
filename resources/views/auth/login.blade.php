@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <style>
         body,
         html {
@@ -15,6 +16,7 @@
             /* Replace this URL with your image */
             background-size: cover;
             background-position: center;
+            font-family: "Poppins", sans-serif;
         }
 
         .ghjkl {
@@ -40,8 +42,8 @@
 <body>
     <div class="ghjkl">
         <div class="container">
-            <div class="card col-lg-3">
-                <h2 class="text-center mb-4">Login</h2>
+            <div class="card col-lg-6">
+                <h2 class="text-center mb-4 fw-800 text-warning">Login</h2>
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="py-3">
@@ -58,14 +60,12 @@
                         <a href="{{ route('password.request') }}" style="text-decoration: none;"><span class="text-primary" style="font-weight:5px !important;">Forgot your password</span></a>
                     </div> --}}
                     <div class="py-2" style="text-align: center;">
-                        <button type="submit" class="btn btn-primary form-control">Submit</button>
+                        <button type="submit" class="btn btn-warning form-control">Submit</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>

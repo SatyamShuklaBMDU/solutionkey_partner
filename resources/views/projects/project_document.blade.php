@@ -105,7 +105,10 @@
     </style>
 @endsection
 @section('content')
-<main class="s-layout__content px-3 my-">
+<main class="s-layout__content px-4 border mt-3">
+    <div class="py-2">
+        <h2><u>Project Document</u></h2>
+    </div>
     <div class="row">
         <div class="col-lg-6">
             <label for="">Document_ID :</label>
@@ -283,6 +286,12 @@
         <div class="col-lg-6">
             <label for=""> Updation_Dt :</label>
             <input type="text">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6"></div>
+        <div class="col-lg-6">
+            <button class="btn btn-outline-primary mt-3" style="width: 50%">Submit</button>
         </div>
     </div>
 </main>

@@ -18,23 +18,21 @@ class Admin extends Model implements Authenticatable
         'password' => 'hashed',
         // 'permissions' => 'array'
     ];
-    // public function hasPermission($permission)
-    // {
-    //     try {
-    //         $userPermissions = json_decode($this->permission, true);
-    //         if (!is_array($userPermissions)) {
-    //             throw new \Exception('User permissions are not properly initialized');
-    //         }
-    //         if (in_array('all', $userPermissions)) {
-    //             return true;
-    //         }
-    //         return in_array($permission, $userPermissions);
-    //     } catch (\Throwable $th) {
-    //         Log::error($th->getMessage());
-    //         return false;
-    //     }
-    // }
-
-
-    
+    public function hasPermission($permission)
+    {
+        // dd($permission);
+        try {
+            $userPermissions = json_decode($this->permission, true);
+            if (!is_array($userPermissions)) {
+                throw new \Exception('User permissions are not properly initialized');
+            }
+            if (in_array('all', $userPermissions)) {
+                return true;
+            }
+            return in_array($permission, $userPermissions);
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+            return false;
+        }
+    }
 }

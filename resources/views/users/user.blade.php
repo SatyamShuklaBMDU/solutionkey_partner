@@ -67,7 +67,7 @@
     <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
-    <main class="s-layout__content px-3">
+    <main class="s-layout__content mt-5">
         <div>
             <h4 class="py-2">Client Profile</h4>
         </div>
@@ -80,7 +80,7 @@
                                 @csrf
                                 <div class="col-md-4">
                                     <label for="datepicker1">From Date:</label>
-                                    <input id="datepicker1" width="250" value="{{$start??''}}" name="start" />
+                                    <input id="datepicker1" width="250" value="{{ $start ?? '' }}" name="start" />
                                     @if ($errors->has('start'))
                                         <div class="text-danger">
                                             <strong>{{ $errors->first('start') }}</strong>
@@ -89,7 +89,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label for="datepicker2">To Date:</label>
-                                    <input id="datepicker2" width="250" value="{{$end??''}}" name="end" />
+                                    <input id="datepicker2" width="250" value="{{ $end ?? '' }}" name="end" />
                                     @if ($errors->has('end'))
                                         <div class="text-danger">
                                             <strong>{{ $errors->first('end') }}</strong>
@@ -104,7 +104,8 @@
                                     </div>
                                     <div>
                                         <label for=""></label>
-                                        <a class="btn btn-success" href="{{url('users')}}" style="border: 0px 9px; font-size:12px; margin-left: 10px;">Reset</a>
+                                        <a class="btn btn-success" href="{{ url('users') }}"
+                                            style="border: 0px 9px; font-size:12px; margin-left: 10px;">Reset</a>
                                     </div>
                                 </div>
                             </div>
@@ -193,11 +194,12 @@
                     </div>
                 </div>
             </div>
-            <div class=" py-3 col-lg-12 data_table">
+            <div class="py-3 col-lg-12 data_table table-responsive">
                 <table id="example" class="table table-bordered table-striped" style="overflow-x: scroll;">
                     <thead>
                         <tr>
                             <td>S.No</td>
+                            <th>Profile</th>
                             <th>Name</th>
                             <th>CIN NO.</th>
                             <th>Registration Date</th>
@@ -209,6 +211,8 @@
                             <th>PIN Code</th>
                             <th>City</th>
                             <th>State</th>
+                            <th>Company Name</th>
+                            <th>GST ID</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -217,6 +221,10 @@
                         @foreach ($users as $user)
                             <tr data-user-id="{{ $user->id }}">
                                 <td>{{ $loop->iteration }}</td>
+                                <td>
+                                    <img src="{{ asset($user->photo) }}" alt="Not Available"
+                                        style="width:50px;height:50px;">
+                                </td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->cin_no }}</td>
                                 <td>{{ date('d-m-Y', strtotime($user->created_at)) }}</td>
@@ -228,6 +236,8 @@
                                 <td>{{ $user->pincode }}</td>
                                 <td>{{ $user->city }}</td>
                                 <td>{{ $user->state }}</td>
+                                <td>{{ $user->company_name }}</td>
+                                <td>{{ $user->gst_id }}</td>
                                 <td>
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" role="switch"
@@ -456,7 +466,7 @@
                                     'success'
                                 );
                                 // Remove the row from the table
-                                $(this).closest('tr').remove();
+                                location.reload();
                             },
                             error: function(xhr, status, error) {
                                 console.error('Error deleting user:', error);

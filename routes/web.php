@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectDocumentController;
 use App\Http\Controllers\ProjectTechnicalController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserManagerController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -49,6 +50,15 @@ Route::middleware('authenticate_both')->group(function () {
 
     // Project Technical
     Route::get('project-technical', [ProjectTechnicalController::class, 'index'])->name('project-technical.index');
+
+    // User Master ROute
+    Route::get('add-user-master', [UserManagerController::class,'index'])->name('add.user.master.index');
+    Route::post('add-user-master', [UserManagerController::class,'store'])->name('add.user.master.store');
+    Route::get('edit-user-master/{id}', [UserManagerController::class,'edit'])->name('edit.user.master');
+    Route::get('all-user-master', [UserManagerController::class,'show'])->name('add.user.master.show');
+    Route::post('/updateUserMasterStatus', [UserManagerController::class, 'changeStatus']);
+    Route::post('/update-user-master/{id}', [UserManagerController::class, 'update'])->name('update-user-master');
+    Route::post('/deleteUserMaster', [UserManagerController::class, 'destroy']);
 });
 
 Route::get('logout-user',function(){
