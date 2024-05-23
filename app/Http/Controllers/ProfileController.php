@@ -2,59 +2,72 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the user's profile form.
-     */
-    public function edit(Request $request): View
+    public function edit(Request $request)
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+        $user = Auth::guard('admins')->user();
+        return view('profile.edit', compact('user'));
     }
 
-    /**
-     * Update the user's profile information.
-     */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function storebasic(Request $request)
     {
-        $request->user()->fill($request->validated());
-
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        // dd($request->all());
+        $user = Auth::guard('admins')->user();
+        $user->gender = $request->gender;
+        $user->mobile_no = $request->phone_number;
+        $user->email = $request->email;
+        $user->name = $request->name;
+        $user->appointment_charge = $request->appointment;
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $photoFileName = uniqid() . '.' . $request->image->extension();
+            $photoPath = $request->file('image')->move(public_path('ProfilePic'), $photoFileName);
+            $photoRelativePath = 'ProfilePic/' . $photoFileName;
+            $user->profile_pic = $photoRelativePath;
         }
-
-        $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        $user->save();
+        return back()->with('success', 'Basic Details Updated Successfully');
     }
-
-    /**
-     * Delete the user's account.
-     */
-    public function destroy(Request $request): RedirectResponse
+    public function storeContact(Request $request)
     {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
-        ]);
-
-        $user = $request->user();
-
-        Auth::logout();
-
-        $user->delete();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return Redirect::to('/');
+        // dd($request->all());
+        $user = Auth::guard('admins')->user();
+        $user->address = $request->address;
+        $user->state = $request->state;
+        $user->country = $request->country;
+        $user->pincode = $request->pincode;
+        $user->specialization = $request->specialization;
+        $user->save();
+        return back()->with('success', 'Contact Details Updated Successfully');
     }
+    public function storePassword(Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required|min:8|confirmed',
+        ]);
+        if (!Hash::check($request->old_password, Auth::guard('admins')->user()->password)) {
+            return back()->withErrors(['old_password' => 'The provided password does not match our records.']);
+        }
+        $user = Auth::guard('admins')->user();
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+        return back()->with('success', 'Password successfully changed.');
+    }
+
+    public function changeStatus(Request $request)
+    {
+        $user = Auth::guard('admins')->user();
+        // dd($request->status);
+        $user->status = $request->status;
+        $user->save();
+        return redirect()->back()->with('success','Status Change Successfully.');
+    }
+
 }

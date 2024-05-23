@@ -45,17 +45,32 @@ body {
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   /* z-index: 1; */
 }
-
+/* Dropdown menu item hover effect */
 .dropdown-content a {
-  color: black;
+  display: flex;
+  align-items: center;
   padding: 4px 7px;
   text-decoration: none;
-  display: block;
+  color: black;
+  width: 100%;
   font-size: 12px;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-.dropdown a:hover {
-  background-color: #ddd;
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+  color: #333;
+}
+
+/* Green effect when online */
+.online-status {
+  color: green !important;
+  font-size: 12px;
+  transition: background-color 0.5s, color 0.5s;
+}
+.offline-status {
+  font-size: 12px;
+  transition: background-color 0.5s, color 0.5s;
 }
 
 .show {

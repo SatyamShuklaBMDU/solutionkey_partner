@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\ProjectDocumentController;
 use App\Http\Controllers\ProjectTechnicalController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserManagerController;
 use Illuminate\Support\Facades\Auth;
@@ -29,9 +31,14 @@ Route::get('/dashboard', function () {
 })->name('dashboard');
 
 Route::middleware('authenticate_both')->group(function () {
+
+    // Profile Route
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('store-basic',[ProfileController::class, 'storebasic'])->name('profile.basic.store');
+    Route::post('store-contact',[ProfileController::class, 'storeContact'])->name('profile.contact.store');
+    Route::post('store-password',[ProfileController::class, 'storePassword'])->name('profile.password.store');
+    Route::post('/change-status', [ProfileController::class, 'changeStatus'])->name('user.changeStatus');
+
     Route::get('users', [UserController::class,'index'])->name('user.index');
     Route::get('/getCityState', [UserController::class, 'getCityState']);
     Route::post('/updateUserStatus', [UserController::class, 'changeStatus']);
@@ -59,6 +66,16 @@ Route::middleware('authenticate_both')->group(function () {
     Route::post('/updateUserMasterStatus', [UserManagerController::class, 'changeStatus']);
     Route::post('/update-user-master/{id}', [UserManagerController::class, 'update'])->name('update-user-master');
     Route::post('/deleteUserMaster', [UserManagerController::class, 'destroy']);
+    Route::post('/filter-user-master', [UserManagerController::class, 'filter'])->name('filter-user-master');
+
+    // Project Profile Route 
+    Route::get('project-profile',[ProfilesController::class,'index'])->name('project.profile.index');
+
+    // Setting Route
+    Route::get('setting',[SettingController::class,'index'])->name('setting.index');
+    Route::post('/setting/time-slots/store', [SettingController::class, 'storeTimeSlots'])->name('setting.time_slots.store');
+    Route::post('/setting/bank-info/store', [SettingController::class, 'storeBankInfo'])->name('setting.bank-info.store');
+
 });
 
 Route::get('logout-user',function(){

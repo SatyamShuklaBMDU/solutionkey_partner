@@ -7,8 +7,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    @yield('style-area')
     @include('include.head')
+    @yield('style-area')
 </head>
 
 <body>
@@ -25,6 +25,7 @@
     {{-- Footer --}}
     <script src="{{ asset('js/navbar.js') }}"></script>
 </body>
+@include('include.footer')
 @yield('script-area')
 <script>
     var dropdown = document.getElementsByClassName("dropdown-btn");
@@ -41,6 +42,5 @@
         });
     }
 </script>
-@include('include.footer')
 
 </html>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\UserMaster;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class UserManagerController extends Controller
@@ -94,5 +95,20 @@ class UserManagerController extends Controller
         $user->status = $status;
         $user->save();
         return response()->json(['message' => 'User status updated successfully.']);
+    }
+
+    public function filter(Request $request)
+    {
+        $request->validate([
+            'start' => 'required',
+            'end' => 'required',
+        ]);
+        $start = $request->input('start');
+        $end = $request->input('end');
+        $carbonStart = Carbon::createFromFormat('d/m/Y', $start)->startOfDay();
+        $carbonEnd = Carbon::createFromFormat('d/m/Y', $end)->endOfDay();
+        $users = UserMaster::whereBetween('created_at', [$carbonStart, $carbonEnd])->get();
+        // dd($users);
+        return view('UserMaster.all_user', compact('users','start','end'));
     }
 }

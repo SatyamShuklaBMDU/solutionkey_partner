@@ -28,17 +28,11 @@ class AuthenticatedSessionController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-
         $admin = Admin::where('email', $request->email)->first();
-
         if (!$admin) {
             return back()->withErrors(['email' => 'These credentials do not match our records.']);
         }
-
-        if ($admin->status == 0) {
-            return back()->withErrors(['email' => 'Your account is not active.']);
-        }
-
+        // dd(Hash::make('12345678'));
         if (Hash::check($request->password, $admin->password)) {
             // dd('1');
             auth()->guard('admins')->login($admin);

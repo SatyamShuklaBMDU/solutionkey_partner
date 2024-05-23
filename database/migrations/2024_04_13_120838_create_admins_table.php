@@ -17,16 +17,19 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('mobile_no')->unique();
             $table->string('password');
-            $table->string('role')->nullable();
-            $table->text('permission')->nullable();
             $table->boolean('status')->default(false);
+            $table->string('appointment_charge')->nullable();
+            $table->string('gender')->nullable();
+            $table->text('address')->nullable();
+            $table->string('state')->nullable();
+            $table->string('country')->nullable();
+            $table->string('pincode')->nullable();
+            $table->string('specialization')->nullable();
+            $table->string('profile_pic')->nullable();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('admins');

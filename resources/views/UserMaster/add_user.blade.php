@@ -1,10 +1,17 @@
 @extends('include.master')
 @section('content')
+<style>
+    input#bt {
+    background: #fc790b;
+}
+</style>
     <main class="s-layout__content px-3">
         <div class="py-3">
             <div>
                 <h4>User Master</h4>
             </div>
+            
+          
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -45,7 +52,7 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
-                            <input type="submit" class="btn btn-primary" id="bt" value="{{ isset($user)?'Update':'Save' }}" />
+                            <input type="submit" class="btn btn-orange" id="bt" value="{{ isset($user)?'Update':'Submit' }}" />
                         </div>
                     </div>
                 </form>

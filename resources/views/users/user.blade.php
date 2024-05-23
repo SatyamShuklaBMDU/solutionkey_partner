@@ -304,7 +304,7 @@
             }
         });
     </script>
-    <script>
+    {{-- <script>
         var dropdown = document.getElementsByClassName("dropdown-btn");
         var i;
 
@@ -336,7 +336,7 @@
                 }
             });
         });
-    </script>
+    </script> --}}
     <script>
         $(document).ready(function() {
             $("#ModalBtn").click(function() {

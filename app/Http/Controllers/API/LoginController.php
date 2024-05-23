@@ -23,6 +23,9 @@ class LoginController extends Controller
         $user = User::where('email', $request->email_or_mobile)
             ->orWhere('phone_number', $request->email_or_mobile)
             ->first();
+        if ($user->status !== 'active') {
+            return response()->json(['message' => 'Account is not active'], 403);
+        }
         if ($user && Auth::attempt(['email' => $user->email, 'password' => $credentials['password']])) {
             $token = $user->createToken('app-token')->plainTextToken;
             return response()->json(['message' => 'Login successful', 'user' => $user, 'token' => $token], 200);
@@ -34,5 +37,4 @@ class LoginController extends Controller
         $request->user()->tokens()->delete();
         return response()->json(['message' => 'Logged out successfully'], 200);
     }
-
 }

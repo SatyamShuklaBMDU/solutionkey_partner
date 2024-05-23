@@ -16,7 +16,7 @@
                         @if (auth()->guard('admins')->check() && auth()->guard('admins')->user()->hasPermission('user'))
                             <li>
                                 <a class="s-sidebar__nav-link" href="{{ route('add.user.master.show') }}">
-                                    <i class="fa-solid fa-user text-warning"></i><em class="text-white">User Master</em>
+                                    <i class="fa-solid fa-user text-warning"></i><em class="text-white">Profile</em>
                                 </a>
                             </li>
                         @endif
@@ -24,7 +24,7 @@
                             <li class=" dropdown-btn position-relative">
                                 <a class="s-sidebar__nav-link d-flex justify-content-between">
 
-                                    <i class="fa fa-cogs  text-warning"></i><em class="text-white">Role Management</em>
+                                    <i class="fa fa-cogs  text-warning"></i><em class="text-white">Schedule</em>
                                     <div>
                                         <i class="fa-solid fa-caret-down position-absolute"
                                             style="right: 19px; top: 11px;"></i>
@@ -34,12 +34,12 @@
                             <div class="dropdown-container">
                                 <li>
                                     <a class="s-sidebar__nav-link" href="{{ route('admin.all.index') }}">
-                                        <em>All User</em>
+                                        <em>Online</em>
                                     </a>
                                 </li>
                                 <li>
                                     <a class="s-sidebar__nav-link" href="{{ route('admin.index') }}">
-                                        <em>Add User</em>
+                                        <em>Physical</em>
                                     </a>
                                 </li>
                             </div>
@@ -48,17 +48,16 @@
                             <li>
                                 <a class="s-sidebar__nav-link" href="{{ route('user.index') }}">
                                     <i class="fa fa-users  text-warning" aria-hidden="true"></i><em
-                                        class="text-white">Client
-                                        Profile Master</em>
+                                        class="text-white">Bookings</em>
                                 </a>
                             </li>
                         @endif
                         <!-- html  start-->
                         @if (auth()->guard('admins')->check() && auth()->guard('admins')->user()->hasPermission('usermanagement'))
                             <li>
-                                <a class="s-sidebar__nav-link" href="client-profile.html">
+                                <a class="s-sidebar__nav-link" href="{{route('project.profile.index')}}">
                                     <i class="fa fa-tasks text-warning" aria-hidden="true"></i><em
-                                        class="text-white">Project Profile</em>
+                                        class="text-white">History</em>
                                 </a>
                             </li>
                         @endif
@@ -66,8 +65,7 @@
                         @if (auth()->guard('admins')->check() && auth()->guard('admins')->user()->hasPermission('usermanagement'))
                             <li>
                                 <a class="s-sidebar__nav-link" href="{{ route('project-document') }}">
-                                  <i class="fa fa-file-word-o text-warning"></i><em class="text-white">Project
-                                        Documents</em>
+                                  <i class="fa fa-file-word-o text-warning"></i><em class="text-white">Consultation Timing</em>
                                 </a>
                             </li>
                         @endif
@@ -75,39 +73,64 @@
                             <li>
                                 <a class="s-sidebar__nav-link" href="{{ route('project-technical.index') }}">
                                   <i class="fa fa-cog text-warning" aria-hidden="true"></i><em
-                                        class="text-white">Project Technical</em>
+                                        class="text-white">Invoice</em>
                                 </a>
                             </li>
                         @endif
                         @if (auth()->guard('admins')->check() && auth()->guard('admins')->user()->hasPermission('payment_history'))
                             <li>
                                 <a class="s-sidebar__nav-link" href="#0">
-                                  <i class="fa fa-money text-warning"></i><em class="text-white">Project Payment
-                                        History</em>
+                                  <i class="fa fa-money text-warning"></i><em class="text-white">Tasks</em>
                                 </a>
                             </li>
                         @endif
                         @if (auth()->guard('admins')->check() && auth()->guard('admins')->user()->hasPermission('usermanagement'))
                             <li>
                                 <a class="s-sidebar__nav-link" href="/call-log.html">
-                                    <i class="fa fa-street-view text-warning"></i><em class="text-white">360 Degree
-                                        View</em>
+                                    <i class="fa fa-street-view text-warning"></i><em class="text-white">Feedback</em>
+                                </a>
+                            </li>
+                        @endif
+                        @if (auth()->guard('admins')->check() && auth()->guard('admins')->user()->hasPermission('usermanagement'))
+                            <li>
+                                <a class="s-sidebar__nav-link" href="/call-log.html">
+                                    <i class="fa fa-street-view text-warning"></i><em class="text-white">Complaints</em>
                                 </a>
                             </li>
                         @endif
                         @if (auth()->guard('admins')->check() && auth()->guard('admins')->user()->hasPermission('usermanagement'))
                             <li>
                                 <a class="s-sidebar__nav-link" href="/feedback.html">
-                                    <i class="fa fa-dashcube text-warning"></i><em class="text-white">Dashboard
-                                        Widget</em>
+                                    <i class="fa fa-dashcube text-warning"></i><em class="text-white">Settings</em>
                                 </a>
                             </li>
                         @endif
                         @if (auth()->guard('admins')->check() && auth()->guard('admins')->user()->hasPermission('usermanagement'))
                             <li>
                                 <a class="s-sidebar__nav-link" href="/payment.html">
-                                    <i class="fa fa-bug text-warning"></i><em class="text-white">Reports
+                                    <i class="fa fa-bug text-warning"></i><em class="text-white">Notification
                                     </em>
+                                </a>
+                            </li>
+                        @endif
+                        @if (auth()->guard('admins')->check() && auth()->guard('admins')->user()->hasPermission('usermanagement'))
+                            <li>
+                                <a class="s-sidebar__nav-link" href="/payment.html">
+                                    <i class="fa fa-bug text-warning"></i><em class="text-white">Calendar</em>
+                                </a>
+                            </li>
+                        @endif
+                        @if (auth()->guard('admins')->check() && auth()->guard('admins')->user()->hasPermission('usermanagement'))
+                            <li>
+                                <a class="s-sidebar__nav-link" href="/payment.html">
+                                    <i class="fa fa-bug text-warning"></i><em class="text-white">Payment History</em>
+                                </a>
+                            </li>
+                        @endif
+                        @if (auth()->guard('admins')->check() && auth()->guard('admins')->user()->hasPermission('usermanagement'))
+                            <li>
+                                <a class="s-sidebar__nav-link" href="/payment.html">
+                                    <i class="fa fa-bug text-warning"></i><em class="text-white">Cases</em>
                                 </a>
                             </li>
                         @endif
