@@ -7,23 +7,10 @@
           <div class="card bg-light shadow-sm p-3">
             <div class="d-flex align-items-center">
               <div class="icon-bg rounded-circle mr-3">
-                <img src="{{asset('images/profile.png')}}" alt="" class="icon">
-              </div>
-              <div class="px-3">
-                <h5 class="fw-bold mb-0" style="color: #FC9FB3;">Total Users</h5>
-                <p class="text-muted fw-bold mb-0">23</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 mt-3 py-1">
-          <div class="card bg-light shadow-sm p-3">
-            <div class="d-flex align-items-center">
-              <div class="icon-bg rounded-circle mr-3">
                 <img src="{{asset('images/booking.png')}}" alt="" class="icon">
               </div>
               <div class="px-3">
-                <h5 class="fw-bold mb-0" style="color: #90D7D7;">Total Booking</h5>
+                <h5 class="fw-bold mb-0" style="color: #90D7D7;">Total Consultations</h5>
                 <p class="text-muted fw-bold mb-0">23</p>
               </div>
             </div>
@@ -36,7 +23,7 @@
                 <img src="https://cdn-icons-png.flaticon.com/128/10509/10509226.png" alt="" class="icon">
               </div>
               <div class="px-3">
-                <h5 class="fw-bold mb-0" style="color: #BFA1FD;">Total Call</h5>
+                <h5 class="fw-bold mb-0" style="color: #BFA1FD;">Pending Consultation</h5>
                 <p class="text-muted fw-bold mb-0">23</p>
               </div>
             </div>
@@ -49,7 +36,7 @@
                 <img src="https://cdn-icons-png.flaticon.com/128/10339/10339845.png" alt="" class="icon">
               </div>
               <div class="px-3">
-                <h5 class="fw-bold mb-0" style="color: #FC9FB3;">Total Payment</h5>
+                <h5 class="fw-bold mb-0 fs-5" style="color: #FC9FB3;">Today Consultation</h5>
                 <p class="text-muted fw-bold mb-0">23</p>
               </div>
             </div>
@@ -62,52 +49,12 @@
                 <img src="{{asset('images/profile.png')}}" alt="" class="icon">
               </div>
               <div class="px-3">
-                <h5 class="fw-bold mb-0" style="color: #FCE098;">Total History</h5>
+                <h5 class="fw-bold mb-0" style="color: #FCE098;">Total Earning</h5>
                 <p class="text-muted fw-bold mb-0">23</p>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-lg-3 mt-3 py-1">
-          <div class="card bg-light shadow-sm p-3">
-            <div class="d-flex align-items-center">
-              <div class="icon-bg rounded-circle mr-3">
-                <img src="{{asset('images/booking.png')}}" alt="" class="icon">
-              </div>
-              <div class="px-3">
-                <h5 class="fw-bold mb-0" style="color: #FC9FB3;">Total Feedback</h5>
-                <p class="text-muted fw-bold mb-0">23</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 mt-3 py-1">
-          <div class="card bg-light shadow-sm p-3">
-            <div class="d-flex align-items-center">
-              <div class="icon-bg rounded-circle mr-3">
-                <img src="https://cdn-icons-png.flaticon.com/128/10509/10509226.png" alt="" class="icon">
-              </div>
-              <div class="px-3">
-                <h5 class="fw-bold mb-0" style="color: #83C5F1;">Total Complain</h5>
-                <p class="text-muted fw-bold mb-0">23</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 mt-3 py-1">
-          <div class="card bg-light shadow-sm p-3">
-            <div class="d-flex align-items-center">
-              <div class="icon-bg rounded-circle mr-3">
-                <img src="https://cdn-icons-png.flaticon.com/128/10339/10339845.png" alt="" class="icon">
-              </div>
-              <div class="px-3">
-                <h5 class="fw-bold mb-0" style="color: #BFA1FD;">Total Bill</h5>
-                <p class="text-muted fw-bold mb-0">23</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
     <section>
       <div class="row py-3">

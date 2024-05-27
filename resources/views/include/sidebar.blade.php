@@ -8,102 +8,32 @@
                 <nav class="s-sidebar__nav">
                     <ul>
                         <li>
-                            <a class="s-sidebar__nav-link active" href="{{ route('dashboard') }}">
+                            <a class="s-sidebar__nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
                                 <i class="fa fa-tachometer text-warning"></i><em class="text-white">Dashbord</em>
                             </a>
                         </li>
                         <li>
-                            <a class="s-sidebar__nav-link" href="{{ route('appointment.index') }}">
+                            <a class="s-sidebar__nav-link {{ request()->routeIs('appointment.index') ? 'active' : '' }}" href="{{ route('appointment.index') }}">
                                 <i class="fa-solid fa-user text-warning"></i><em class="text-white">Appointment</em>
                             </a>
                         </li>
-                        {{-- <li class=" dropdown-btn position-relative">
-                            <a class="s-sidebar__nav-link d-flex justify-content-between">
-
-                                <i class="fa fa-cogs  text-warning"></i><em class="text-white">Schedule</em>
-                                <div>
-                                    <i class="fa-solid fa-caret-down position-absolute"
-                                        style="right: 19px; top: 11px;"></i>
-                                </div>
-                            </a>
-                        </li>
-                        <div class="dropdown-container">
-                            <li>
-                                <a class="s-sidebar__nav-link" href="{{ route('admin.all.index') }}">
-                                    <em>Online</em>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="s-sidebar__nav-link" href="{{ route('admin.index') }}">
-                                    <em>Physical</em>
-                                </a>
-                            </li>
-                        </div>
                         <li>
-                            <a class="s-sidebar__nav-link" href="{{ route('user.index') }}">
-                                <i class="fa fa-users  text-warning" aria-hidden="true"></i><em
-                                    class="text-white">Bookings</em>
+                            <a class="s-sidebar__nav-link {{ request()->routeIs('total.earning') ? 'active' : '' }}" href="{{ route('total.earning') }}">
+                                <i class="fas fa-indian-rupee-sign text-warning"></i><em class="text-white">Total
+                                    Earnings</em>
                             </a>
                         </li>
                         <li>
-                            <a class="s-sidebar__nav-link" href="{{ route('project.profile.index') }}">
-                                <i class="fa fa-tasks text-warning" aria-hidden="true"></i><em
-                                    class="text-white">History</em>
+                            <a class="s-sidebar__nav-link {{ request()->routeIs('income.wallet') ? 'active' : '' }}" href="{{ route('income.wallet') }}">
+                                <i class="fas fa-wallet text-warning"></i><em class="text-white">Income Wallet</em>
                             </a>
                         </li>
                         <li>
-                            <a class="s-sidebar__nav-link" href="{{ route('project-document') }}">
-                                <i class="fa fa-file-word-o text-warning"></i><em class="text-white">Consultation
-                                    Timing</em>
+                            <a class="s-sidebar__nav-link {{ request()->routeIs('withdraw.index') ? 'active' : '' }}" href="{{ route('withdraw.index') }}">
+                                <i class="fas fa-indian-rupee-sign text-warning"></i><em
+                                    class="text-white">Withdraw</em>
                             </a>
                         </li>
-                        <li>
-                            <a class="s-sidebar__nav-link" href="{{ route('project-technical.index') }}">
-                                <i class="fa fa-cog text-warning" aria-hidden="true"></i><em
-                                    class="text-white">Invoice</em>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="s-sidebar__nav-link" href="#0">
-                                <i class="fa fa-money text-warning"></i><em class="text-white">Tasks</em>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="s-sidebar__nav-link" href="/call-log.html">
-                                <i class="fa fa-street-view text-warning"></i><em class="text-white">Feedback</em>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="s-sidebar__nav-link" href="/call-log.html">
-                                <i class="fa fa-street-view text-warning"></i><em class="text-white">Complaints</em>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="s-sidebar__nav-link" href="/feedback.html">
-                                <i class="fa fa-dashcube text-warning"></i><em class="text-white">Settings</em>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="s-sidebar__nav-link" href="/payment.html">
-                                <i class="fa fa-bug text-warning"></i><em class="text-white">Notification
-                                </em>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="s-sidebar__nav-link" href="/payment.html">
-                                <i class="fa fa-bug text-warning"></i><em class="text-white">Calendar</em>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="s-sidebar__nav-link" href="/payment.html">
-                                <i class="fa fa-bug text-warning"></i><em class="text-white">Payment History</em>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="s-sidebar__nav-link" href="/payment.html">
-                                <i class="fa fa-bug text-warning"></i><em class="text-white">Cases</em>
-                            </a>
-                        </li> --}}
                     </ul>
                 </nav>
             </div>

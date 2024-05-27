@@ -1,10 +1,13 @@
 <?php
 
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\EarningController;
+use App\Http\Controllers\IncomeWalletController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WithdrawController;
 use App\Models\Appointement;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -45,6 +48,15 @@ Route::middleware('authenticate_both')->group(function () {
     Route::get('appointment-index',[AppointmentController::class,'index'])->name('appointment.index');
     Route::get('/api/appointments', [AppointmentController::class,'getdynamically']);
     Route::get('get-appointment-history',[AppointmentController::class,'getHistory'])->name('get.appointment.history');
+
+    // Total Earning Route
+    Route::get('/total-earning', [EarningController::class, 'index'])->name('total.earning');
+
+    // Withdraw Route
+    Route::get('/withdraw', [WithdrawController::class, 'index'])->name('withdraw.index');
+
+    // Income Wallet Route
+    Route::get('/income-wallet', [IncomeWalletController::class, 'index'])->name('income.wallet');
 
     // Project Profile Route 
     Route::get('project-profile',[ProfilesController::class,'index'])->name('project.profile.index');

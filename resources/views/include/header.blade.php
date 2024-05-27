@@ -4,12 +4,19 @@
             <img src="{{ asset('images/logo-3.webp') }}" alt="" style="width: 120px;">
         </div>
         <div class="d-flex justify-content-center">
-            <div class="pt-3" id="openModalButton">
-                <p class=" px-4"><i class="fa-solid fa-bell"></i></p>
+            <div class="pt-3 notification" id="openModalButton">
+                <p class="px-4">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="badge">3</span>
+                </p>
             </div>
             <div class="d-flex justify-content-center" style=" margin-top: 14px;">
-                <div style="height: 30px; width: 30px;">
-                    <img src="images/profile.png" alt="" style="width: 20px;">
+                <div style="height: 30px; width: 30px; position: relative;">
+                    <img src="{{ asset(auth()->guard('admins')->user()->profile_pic) }}" class="rounded" alt=""
+                        style="width: 25px;">
+                    <div
+                        class="status-indicator {{ auth()->guard('admins')->user()->status == 1 ? 'online' : 'offline' }}">
+                    </div>
                 </div>
                 <div class="d-flex">
                     <div onclick="myFunction()" class="d-flex ">
@@ -21,7 +28,8 @@
                             <i class="fa-solid fa-signal mt-1"></i>
                             <form id="statusForm" action="{{ route('user.changeStatus') }}" method="POST">
                                 @csrf
-                                <input type="hidden" name="status" id="statusInput" value="{{ auth()->guard('admins')->user()->status == 1 ? '0' : '1' }}">
+                                <input type="hidden" name="status" id="statusInput"
+                                    value="{{ auth()->guard('admins')->user()->status == 1 ? '0' : '1' }}">
                                 <button type="submit" id="statusButton" class="btn btn-link"
                                     style="text-decoration: none;">Set Online</button>
                             </form>
