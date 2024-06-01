@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-light shadow-sm" style="z-index: 1;">
     <div class="container-fluid">
         <div class="">
-            <img src="{{ asset('images/logo-3.webp') }}" alt="" style="width: 120px;">
+            <img src="{{ asset('images/solutnkey.jpg') }}" alt="" style="width: 200px;">
         </div>
         <div class="d-flex justify-content-center">
             <div class="pt-3 notification" id="openModalButton">
@@ -12,7 +12,7 @@
             </div>
             <div class="d-flex justify-content-center" style=" margin-top: 14px;">
                 <div style="height: 30px; width: 30px; position: relative;">
-                    <img src="{{ asset(auth()->guard('admins')->user()->profile_pic) }}" class="rounded" alt=""
+                    <img src="{{ asset(auth()->guard('admins')->user()->profile_picture) }}" class="rounded" alt=""
                         style="width: 25px;">
                     <div
                         class="status-indicator {{ auth()->guard('admins')->user()->status == 1 ? 'online' : 'offline' }}">

@@ -9,7 +9,7 @@ class AccountDetails extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'doctor_id',
+        'vendor_id',
         'aacount_number',
         'ifsc',
         'bank_name',

@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class DoctorTimeSlot extends Model
 {
     use HasFactory;
-    protected $fillable = ['doctor_id', 'time_slot', 'type'];
+    protected $table="vendor_time_slots";
+    protected $fillable = ['vendor_id', 'time_slot', 'type'];
 }

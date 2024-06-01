@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('account_details', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('doctor_id');
+            $table->unsignedBigInteger('vendor_id');
             $table->string('aacount_number')->nullable();
             $table->string('ifsc')->nullable();
             $table->string('bank_name')->nullable();
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('customer_name')->nullable();
             $table->string('upi_id')->nullable();
             $table->string('upi_number')->nullable();
-            $table->foreign('doctor_id')->references('id')->on('admins')->onDelete('cascade');
+            $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade');
             $table->timestamps();
         });
     }

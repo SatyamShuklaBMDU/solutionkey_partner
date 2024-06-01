@@ -9,7 +9,9 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WithdrawController;
 use App\Models\Appointement;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +26,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    // Hash::make('1234');
     return view('auth.login');
 });
 
@@ -73,4 +76,10 @@ Route::get('logout-user',function(){
     return redirect()->route('login');
 });
 
+Route::get('clear-cache',function(){
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('route:clear');
+    return redirect()->back();
+});
 require __DIR__.'/auth.php';

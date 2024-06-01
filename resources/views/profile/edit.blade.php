@@ -71,7 +71,7 @@
                             <div class="small-12 medium-2 large-2 columns" style="position: relative">
                                 <div class="circle">
                                     <img class="profile-pic"
-                                        @if (isset($user->profile_pic)) src="{{ asset($user->profile_pic) }}" @else src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" @endif>
+                                        @if (isset($user->profile_picture)) src="{{ asset($user->profile_picture) }}" @else src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" @endif>
                                 </div>
                                 <div class="p-image">
                                     <i class="fa fa-camera upload-button"></i>
@@ -98,7 +98,7 @@
                                 <div class="col-lg-6">
                                     <label for="number">Mobile Number:</label>
                                     <input type="number" name="phone_number"
-                                        @isset($user->mobile_no) value="{{ $user->mobile_no }}" readonly @endisset
+                                        @isset($user->phone_number) value="{{ $user->phone_number }}" readonly @endisset
                                         id="number" placeholder="Phone Number" class="w-100 p-1 form-control" />
                                 </div>
                                 <div class="col-lg-6">
@@ -226,6 +226,9 @@
 @section('script-area')
     <script>
         $(document).ready(function() {
+            @if (session()->has('success'))
+                toastr.success('{{ session('success') }}');
+            @endif
             var readURL = function(input) {
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
@@ -241,9 +244,6 @@
             $(".upload-button").on('click', function() {
                 $(".file-upload").click();
             });
-            @if (session()->has('success'))
-                toastr.success('{{ session('success') }}');
-            @endif
         });
     </script>
 @endsection

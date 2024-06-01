@@ -19,7 +19,7 @@
         {{-- Phone Number --}}
         <div class="mt-4">
             <x-input-label for="mobile_no" :value="__('Mobile')" />
-            <x-text-input id="mobile_no" class="block mt-1 w-full" type="number" name="mobile_no" :value="old('mobile_no')" required autocomplete="mobile_no" />
+            <x-text-input id="mobile_no" class="block mt-1 w-full" type="number" name="phone_number" :value="old('phone_number')" required autocomplete="mobile_no" />
             <x-input-error :messages="$errors->get('mobile_no')" class="mt-2" />
         </div>
 

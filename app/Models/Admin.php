@@ -6,12 +6,15 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Log;
+use Laravel\Sanctum\HasApiTokens;
 
 class Admin extends Model implements Authenticatable
 {
     use AuthenticatableTrait;
-    use HasFactory;
+    use HasFactory, HasApiTokens, Notifiable;
+    protected $table = 'vendors';
     protected $guarded=[];
     protected $guard = 'admins';
     protected $casts = [

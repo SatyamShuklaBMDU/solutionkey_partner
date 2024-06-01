@@ -20,15 +20,15 @@ class ProfileController extends Controller
         // dd($request->all());
         $user = Auth::guard('admins')->user();
         $user->gender = $request->gender;
-        $user->mobile_no = $request->phone_number;
+        $user->phone_number = $request->phone_number;
         $user->email = $request->email;
         $user->name = $request->name;
         $user->appointment_charge = $request->appointment;
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $photoFileName = uniqid() . '.' . $request->image->extension();
-            $photoPath = $request->file('image')->move(public_path('ProfilePic'), $photoFileName);
-            $photoRelativePath = 'ProfilePic/' . $photoFileName;
-            $user->profile_pic = $photoRelativePath;
+            $photoPath = $request->file('image')->move(public_path('profile_picture'), $photoFileName);
+            $photoRelativePath = 'profile_picture/' . $photoFileName;
+            $user->profile_picture = $photoRelativePath;
         }
         $user->save();
         return back()->with('success', 'Basic Details Updated Successfully');
@@ -50,7 +50,7 @@ class ProfileController extends Controller
         // dd($request->all());
         $request->validate([
             'old_password' => 'required',
-            'new_password' => 'required|min:8|confirmed',
+            'new_password' => 'required|min:4|max:4|confirmed',
         ]);
         if (!Hash::check($request->old_password, Auth::guard('admins')->user()->password)) {
             return back()->withErrors(['old_password' => 'The provided password does not match our records.']);

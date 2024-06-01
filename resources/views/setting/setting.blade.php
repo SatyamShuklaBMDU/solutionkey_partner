@@ -117,7 +117,7 @@
                             <div class="small-12 medium-2 large-2 columns" style="position: relative">
                                 <div class="circle">
                                     <img class="profile-pic"
-                                        @if (isset($user->profile_pic)) src="{{ asset($user->profile_pic) }}" @else src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" @endif>
+                                        @if (isset($user->profile_picture)) src="{{ asset($user->profile_picture) }}" @else src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" @endif>
                                 </div>
                                 <div class="p-image">
                                     {{-- <i class="fa fa-camera upload-button"></i> --}}

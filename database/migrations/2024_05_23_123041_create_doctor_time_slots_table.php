@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('doctor_time_slots', function (Blueprint $table) {
+        Schema::create('vendor_time_slots', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('doctor_id');
+            $table->unsignedBigInteger('vendor_id');
             $table->string('time_slot');
             $table->enum('type', ['online', 'offline']);
-            $table->foreign('doctor_id')->references('id')->on('admins')->onDelete('cascade');
+            $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade');
             $table->timestamps();
         });
     }

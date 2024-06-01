@@ -39,7 +39,7 @@
                     <div class="col-md-12">
                         <div class="card mb-3">
                             <div class="card-header">
-                                <img src="{{ auth()->guard('admins')->user()->profile_pic }}" alt="" width="25px"
+                                <img src="{{ auth()->guard('admins')->user()->profile_picture }}" alt="" width="25px"
                                     height="25px" class="rounded-circle"> {{ auth()->guard('admins')->user()->name }}
                             </div>
                             <div class="card-body d-flex">

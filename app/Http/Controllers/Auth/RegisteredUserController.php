@@ -33,22 +33,21 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'mobile_no' => ['required','unique:'.Admin::class,'min:10'],
+            'phone_number' => ['required','unique:'.Admin::class,'min:10'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.Admin::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-
+        $randomDigits = mt_rand(10000, 99999);
+        $vendorid = 'VEND' . $randomDigits;
         $user = Admin::create([
+            'vendor_id'=>$vendorid,
             'name' => $request->name,
             'email' => $request->email,
-            'mobile_no' =>$request->mobile_no,
+            'phone_number' =>$request->mobile_no,
             'password' => Hash::make($request->password),
         ]);
-
         event(new Registered($user));
-
         Auth::guard('admins')->login($user);
-
         return redirect(RouteServiceProvider::HOME);
     }
 }

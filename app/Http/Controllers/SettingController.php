@@ -14,7 +14,7 @@ class SettingController extends Controller
     {
         $user = Auth::guard('admins')->user();
         $timeSlots = $this->generateTimeSlots();
-        $account = AccountDetails::where('doctor_id',Auth::guard('admins')->id())->first();
+        $account = AccountDetails::where('vendor_id',Auth::guard('admins')->id())->first();
         return view('setting.setting', compact('timeSlots','account','user'));
     }
 
@@ -45,14 +45,14 @@ class SettingController extends Controller
         $offlineSlots = $validatedData['time_slots_offline'];
         foreach ($onlineSlots as $slot) {
             DoctorTimeSlot::create([
-                'doctor_id' => $userId,
+                'vendor_id' => $userId,
                 'time_slot' => $slot,
                 'type' => 'online',
             ]);
         }
         foreach ($offlineSlots as $slot) {
             DoctorTimeSlot::create([
-                'doctor_id' => $userId,
+                'vendor_id' => $userId,
                 'time_slot' => $slot,
                 'type' => 'offline',
             ]);
@@ -82,7 +82,7 @@ class SettingController extends Controller
             'upi_number' => $request->input('upi_number'),
         ];
         AccountDetails::updateOrCreate(
-            ['doctor_id' => $doctorId],
+            ['vendor_id' => $doctorId],
             $data
         );
         return redirect('setting')->with('success', 'Account Details Updated.');
