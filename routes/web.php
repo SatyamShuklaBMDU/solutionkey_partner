@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    // Hash::make('1234');
+// Hash::make('1234');
     return view('auth.login');
 });
 

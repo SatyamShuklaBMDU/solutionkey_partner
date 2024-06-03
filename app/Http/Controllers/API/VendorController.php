@@ -38,11 +38,11 @@ class VendorController extends Controller
             $vendor->vendor_id = $vendorid;
             $vendor->account_status = '0';
             $vendor->save();
-            return response()->json(['message' => 'Vendor registered successfully', 'data' => $vendor], 201);
+            return response()->json(['message' => 'Vendor registered successfully', 'data' => $vendor], Response::HTTP_CREATED);
         } catch (ValidationException $e) {
-            return response()->json(['error' => $e->getMessage()], 422);
+            return response()->json(['error' => $e->getMessage()], Response::HTTP_UNPROCESSABLE_ENTITY);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Failed to register vendor', 'message' => $e->getMessage()], 500);
+            return response()->json(['error' => 'Failed to register vendor', 'message' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -104,22 +104,22 @@ class VendorController extends Controller
                 'profile_picture',
                 'cover_picture',
             ]));
-            return response()->json(['message' => 'Vendor details updated successfully', 'data' => $vendor], 200);
+            return response()->json(['message' => 'Vendor details updated successfully', 'data' => $vendor], Response::HTTP_OK);
         } catch (ModelNotFoundException $e) {
-            return response()->json(['message' => 'Vendor not found'], 404);
+            return response()->json(['message' => 'Vendor not found'], Response::HTTP_NOT_FOUND);
         } catch (ValidationException $e) {
-            return response()->json(['message' => $e->getMessage()], 422);
+            return response()->json(['message' => $e->getMessage()], Response::HTTP_UNPROCESSABLE_ENTITY);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Failed to update vendor details', 'error' => $e->getMessage()], 500);
+            return response()->json(['message' => 'Failed to update vendor details', 'error' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
     public function vendorDetails(Request $request)
     {
         $login = Auth::user();
         if ($login) {
-            return response()->json(['Vendor' => $login, 'message' => 'Vendors All Details'], 200);
+            return response()->json(['Vendor' => $login, 'message' => 'Vendors All Details'], Response::HTTP_OK);
         } else {
-            return response()->json(['message' => 'Not Authenticated Vendor'], 401);
+            return response()->json(['message' => 'Not Authenticated Vendor'], Response::HTTP_UNAUTHORIZED);
         }
     }
     public function login(Request $request)
@@ -139,14 +139,14 @@ class VendorController extends Controller
             if (Auth::guard('admins')->attempt(['phone_number' => $request->phone_number, 'password' => $request->password])) {
                 $vendor = Auth::guard('admins')->user();
                 $token = $vendor->createToken('VendorAppToken')->plainTextToken;
-                return response()->json(['message' => 'Login Successfully', 'token' => $token, 'id' => $vendor->id], 200);
+                return response()->json(['message' => 'Login Successfully', 'token' => $token, 'id' => $vendor->id], Response::HTTP_OK);
             } else {
                 throw ValidationException::withMessages([
                     'phone_number' => ['The provided credentials are incorrect.'],
                 ]);
             }
         } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 401);
+            return response()->json(['error' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -157,12 +157,12 @@ class VendorController extends Controller
             return response()->json([
                 'message' => 'Logout successful',
                 'status' => 'success',
-            ], 200);
+            ], Response::HTTP_OK);
         } else {
             return response()->json([
                 'message' => 'User not authenticated',
                 'status' => 'error',
-            ], 401);
+            ], Response::HTTP_UNAUTHORIZED);
         }
     }
 
@@ -183,15 +183,15 @@ class VendorController extends Controller
             }
             $vendor = Auth::user();
             if (!Hash::check($request->current_password, $vendor->password)) {
-                return response()->json(['message' => 'The provided current password is incorrect'], 422);
+                return response()->json(['message' => 'The provided current password is incorrect'], Response::HTTP_UNPROCESSABLE_ENTITY);
             }
             $vendor->password = Hash::make($request->new_password);
             $vendor->save();
-            return response()->json(['message' => 'Password changed successfully'], 200);
+            return response()->json(['message' => 'Password changed successfully'], Response::HTTP_OK);
         } catch (ValidationException $e) {
-            return response()->json(['message' => $e->getMessage()], 422);
+            return response()->json(['message' => $e->getMessage()], Response::HTTP_UNPROCESSABLE_ENTITY);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Failed to change password', 'error' => $e->getMessage()], 500);
+            return response()->json(['message' => 'Failed to change password', 'error' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }
