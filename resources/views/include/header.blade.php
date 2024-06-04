@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-light shadow-sm" style="z-index: 1;">
     <div class="container-fluid">
         <div class="">
-            <img src="{{ asset('images/solutnkey.jpg') }}" alt="" style="width: 200px;">
+            <img src="{{ asset('images/logo.png') }}" alt="" style="width: 200px;">
         </div>
         <div class="d-flex justify-content-center">
             <div class="pt-3 notification" id="openModalButton">

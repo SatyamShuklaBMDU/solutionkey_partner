@@ -26,11 +26,12 @@ Route::prefix('vendor')->group(function () {
     Route::post('/register', [VendorController::class, 'register']);
     Route::post('/login', [VendorController::class, 'login']);
     Route::post('/update', [VendorController::class, 'update'])->middleware('auth:sanctum');
-    Route::post('/details', [VendorController::class, 'vendorDetails'])->middleware('auth:sanctum');
+    Route::get('/details', [VendorController::class, 'vendorDetails'])->middleware('auth:sanctum');
     Route::post('/logout', [VendorController::class, 'logout'])->middleware('auth:sanctum');
     Route::post('/change-password', [VendorController::class, 'changePassword'])->middleware('auth:sanctum');
     Route::post('/posts', [PostController::class, 'store'])->middleware('auth:sanctum');
     Route::post('/posts/update', [PostController::class, 'update'])->middleware('auth:sanctum');
+    Route::get('get-all-posts',[PostController::class,'allposts'])->middleware('auth:sanctum');
     Route::post('/feedback', [VendorFeedbackController::class, 'addFeedback'])->middleware('auth:sanctum');
     Route::get('/feedback', [VendorFeedbackController::class, 'GetFeedback'])->middleware('auth:sanctum');
     Route::post('/complaint', [VendorFeedbackController::class, 'addcomplaint'])->middleware('auth:sanctum');

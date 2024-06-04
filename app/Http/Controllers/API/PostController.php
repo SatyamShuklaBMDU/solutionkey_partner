@@ -54,7 +54,6 @@ class PostController extends Controller
             $validator = Validator::make($request->all(), [
                 'content' => 'required|string',
                 'post_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-                'vendor_id' => 'required|exists:vendors,id',
             ]);
             if ($validator->fails()) {
                 $response = ['status' => false];
@@ -64,7 +63,7 @@ class PostController extends Controller
                 return response()->json($response, Response::HTTP_BAD_REQUEST);
             }
             $post->content = $request->input('content');
-            $post->vendor_id = $request->input('vendor_id');
+            $post->vendor_id = Auth::id();
             if ($request->hasFile('post_image')) {
                 $image = $request->file('post_image');
                 $imageName = time() . '.' . $image->getClientOriginalExtension();
@@ -81,7 +80,7 @@ class PostController extends Controller
     {
         try {
             $posts = Post::with('vendor')->get();
-            $posturl = "https://qbacp.com/solutionkey/public/images/posts/";
+            $posturl = "https://bmdublog.com/SolutionkeyPartner/public/images/posts/";
             $postinarray = $posts->map(function ($post) use ($posturl) {
                 return [
                     'id' => $post->id,

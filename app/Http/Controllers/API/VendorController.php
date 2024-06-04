@@ -21,6 +21,7 @@ class VendorController extends Controller
                 'name' => 'required|string|max:255',
                 'phone_number' => 'required|string|min:10|unique:vendors,phone_number',
                 'password' => 'required|string|min:4',
+                'email' => 'required|email|unique:vendors,email'
             ]);
             if ($validator->fails()) {
                 $response = ['status' => false];
@@ -139,7 +140,7 @@ class VendorController extends Controller
             if (Auth::guard('admins')->attempt(['phone_number' => $request->phone_number, 'password' => $request->password])) {
                 $vendor = Auth::guard('admins')->user();
                 $token = $vendor->createToken('VendorAppToken')->plainTextToken;
-                return response()->json(['message' => 'Login Successfully', 'token' => $token, 'id' => $vendor->id], Response::HTTP_OK);
+                return response()->json(['message' => 'Login Successfull.', 'token' => $token, 'id' => $vendor->id], Response::HTTP_OK);
             } else {
                 throw ValidationException::withMessages([
                     'phone_number' => ['The provided credentials are incorrect.'],
@@ -152,12 +153,31 @@ class VendorController extends Controller
 
     public function logout(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'password' => 'required|string|max:4',
+        ]);
+        if ($validator->fails()) {
+            $response = ['status' => false];
+            foreach ($validator->errors()->toArray() as $field => $messages) {
+                $response[$field] = $messages[0];
+            }
+            return response()->json($response, Response::HTTP_BAD_REQUEST);
+        }
+        // dd(Auth::user()->password);
+        $pass = Auth::user()->password;
         if (Auth::user()) {
-            $request->user()->tokens()->delete();
-            return response()->json([
-                'message' => 'Logout successful',
-                'status' => 'success',
-            ], Response::HTTP_OK);
+            if (Hash::check($request->password, $pass)) {
+                $request->user()->tokens()->delete();
+                return response()->json([
+                    'message' => 'Logout successful',
+                    'status' => 'success',
+                ], Response::HTTP_OK);
+            } else {
+                return response()->json([
+                    'message' => 'Invalid password',
+                    'status' => false,
+                ], Response::HTTP_BAD_REQUEST);
+            }
         } else {
             return response()->json([
                 'message' => 'User not authenticated',
@@ -171,7 +191,7 @@ class VendorController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'current_password' => 'required|string',
-                'new_password' => 'required|string|min:8',
+                'new_password' => 'required|string|min:4',
                 'confirm_password' => 'required|string|same:new_password',
             ]);
             if ($validator->fails()) {
