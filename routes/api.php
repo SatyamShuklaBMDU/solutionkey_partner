@@ -23,7 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::prefix('vendor')->group(function () {
-    Route::post('/register', [VendorController::class, 'register']);
+    Route::post('/sign-up', [VendorController::class, 'register']);
     Route::post('/login', [VendorController::class, 'login']);
     Route::post('/update', [VendorController::class, 'update'])->middleware('auth:sanctum');
     Route::get('/details', [VendorController::class, 'vendorDetails'])->middleware('auth:sanctum');

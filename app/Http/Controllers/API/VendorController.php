@@ -82,6 +82,20 @@ class VendorController extends Controller
                 }
                 return response()->json($response, Response::HTTP_BAD_REQUEST);
             }
+            if ($request->hasFile('profile_picture')) {
+                $profilePicture = $request->file('profile_picture');
+                $profilePictureName = 'profile_' . time() . '.' . $profilePicture->getClientOriginalExtension();
+                $profilePicture->move(public_path('profile_pictures'), $profilePictureName);
+                $vendor->profile_picture = 'profile_pictures/' . $profilePictureName;
+            }
+    
+            if ($request->hasFile('cover_picture')) {
+                $coverPicture = $request->file('cover_picture');
+                $coverPictureName = 'cover_' . time() . '.' . $coverPicture->getClientOriginalExtension();
+                $coverPicture->move(public_path('cover_pictures'), $coverPictureName);
+                $vendor->cover_picture = 'cover_pictures/' . $coverPictureName;
+            }
+    
             $vendor->update($request->only([
                 'name',
                 'highest_qualification',
@@ -102,9 +116,8 @@ class VendorController extends Controller
                 'address',
                 'about',
                 'status',
-                'profile_picture',
-                'cover_picture',
             ]));
+            $vendor->save();
             return response()->json(['message' => 'Vendor details updated successfully', 'data' => $vendor], Response::HTTP_OK);
         } catch (ModelNotFoundException $e) {
             return response()->json(['message' => 'Vendor not found'], Response::HTTP_NOT_FOUND);

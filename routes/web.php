@@ -6,7 +6,6 @@ use App\Http\Controllers\IncomeWalletController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\SettingController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\WithdrawController;
 use App\Models\Appointement;
 use Illuminate\Support\Facades\Artisan;
@@ -43,9 +42,9 @@ Route::middleware('authenticate_both')->group(function () {
     Route::post('store-password',[ProfileController::class, 'storePassword'])->name('profile.password.store');
     Route::post('/change-status', [ProfileController::class, 'changeStatus'])->name('user.changeStatus');
 
-    Route::get('users', [UserController::class,'index'])->name('user.index');
-    Route::get('/getCityState', [UserController::class, 'getCityState']);
-    Route::post('/updateUserStatus', [UserController::class, 'changeStatus']);
+    // Route::get('users', [UserController::class,'index'])->name('user.index');
+    // Route::get('/getCityState', [UserController::class, 'getCityState']);
+    // Route::post('/updateUserStatus', [UserController::class, 'changeStatus']);
     
     // Appointment Route 
     Route::get('appointment-index',[AppointmentController::class,'index'])->name('appointment.index');
