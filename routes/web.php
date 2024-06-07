@@ -41,28 +41,18 @@ Route::middleware('authenticate_both')->group(function () {
     Route::post('store-contact',[ProfileController::class, 'storeContact'])->name('profile.contact.store');
     Route::post('store-password',[ProfileController::class, 'storePassword'])->name('profile.password.store');
     Route::post('/change-status', [ProfileController::class, 'changeStatus'])->name('user.changeStatus');
-
-    // Route::get('users', [UserController::class,'index'])->name('user.index');
-    // Route::get('/getCityState', [UserController::class, 'getCityState']);
-    // Route::post('/updateUserStatus', [UserController::class, 'changeStatus']);
-    
     // Appointment Route 
     Route::get('appointment-index',[AppointmentController::class,'index'])->name('appointment.index');
     Route::get('/api/appointments', [AppointmentController::class,'getdynamically']);
     Route::get('get-appointment-history',[AppointmentController::class,'getHistory'])->name('get.appointment.history');
-
     // Total Earning Route
     Route::get('/total-earning', [EarningController::class, 'index'])->name('total.earning');
-
     // Withdraw Route
     Route::get('/withdraw', [WithdrawController::class, 'index'])->name('withdraw.index');
-
     // Income Wallet Route
     Route::get('/income-wallet', [IncomeWalletController::class, 'index'])->name('income.wallet');
-
     // Project Profile Route 
     Route::get('project-profile',[ProfilesController::class,'index'])->name('project.profile.index');
-
     // Setting Route
     Route::get('setting',[SettingController::class,'index'])->name('setting.index');
     Route::post('/setting/time-slots/store', [SettingController::class, 'storeTimeSlots'])->name('setting.time_slots.store');
