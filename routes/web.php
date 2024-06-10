@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\EarningController;
 use App\Http\Controllers\IncomeWalletController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\SettingController;
@@ -58,6 +60,19 @@ Route::middleware('authenticate_both')->group(function () {
     Route::post('/setting/time-slots/store', [SettingController::class, 'storeTimeSlots'])->name('setting.time_slots.store');
     Route::post('/setting/bank-info/store', [SettingController::class, 'storeBankInfo'])->name('setting.bank-info.store');
 
+    // Post Route
+    Route::get('/post',[PostController::class,'index'])->name('post.index');
+    Route::get('/posts/data', [PostController::class,'getData'])->name('posts.data');
+    Route::post('/posts/update', [PostController::class,'update'])->name('posts.update');
+    Route::post('/posts/delete', [PostController::class,'delete'])->name('posts.delete');
+    Route::post('/posts/status', [PostController::class,'status'])->name('posts.status');
+
+    // Blog Route
+    Route::get('/blog',[BlogController::class,'index'])->name('blog.index');
+    Route::get('/posts/data', [BlogController::class,'getData'])->name('blog.data');
+    Route::post('/blog/update', [BlogController::class,'update'])->name('blog.update');
+    Route::post('/blog/delete', [BlogController::class,'delete'])->name('blog.delete');
+    Route::post('/blog/status', [BlogController::class,'status'])->name('blog.status');
 });
 
 Route::get('logout-user',function(){

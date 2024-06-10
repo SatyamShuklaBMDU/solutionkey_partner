@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\BlogController;
 use App\Http\Controllers\API\LoginController;
 use App\Http\Controllers\API\PostController;
 use App\Http\Controllers\API\UserController;
@@ -36,6 +37,6 @@ Route::prefix('vendor')->group(function () {
     Route::get('/feedback', [VendorFeedbackController::class, 'GetFeedback'])->middleware('auth:sanctum');
     Route::post('/complaint', [VendorFeedbackController::class, 'addcomplaint'])->middleware('auth:sanctum');
     Route::get('/complaint', [VendorFeedbackController::class, 'Getcomplaint'])->middleware('auth:sanctum');
-    // Route::post('/blogs/register', [BlogController::class, 'register'])->middleware('auth:sanctum');
+    Route::post('/blogs/register', [BlogController::class, 'register'])->middleware('auth:sanctum');
     // Route::post('/schedule_slots', [SlotController::class, 'scheduleSlot']);
 });

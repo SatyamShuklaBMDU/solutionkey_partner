@@ -30,7 +30,7 @@ class PostController extends Controller
             $post = new Post();
             $post->content = $request->input('content');
             $post->vendor_id = $login->id;
-            if ($request->hasFile('post_image')) {
+            if ($request->hasFile('post_image') && $request->file('post_image')->isValid()) {
                 $image = $request->file('post_image');
                 $imageName = time() . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('images/posts'), $imageName);
@@ -64,7 +64,7 @@ class PostController extends Controller
             }
             $post->content = $request->input('content');
             $post->vendor_id = Auth::id();
-            if ($request->hasFile('post_image')) {
+            if ($request->hasFile('post_image') && $request->file('post_image')->isValid()) {
                 $image = $request->file('post_image');
                 $imageName = time() . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('images/posts'), $imageName);

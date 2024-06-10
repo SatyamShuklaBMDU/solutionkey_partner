@@ -34,6 +34,18 @@
                                     class="text-white">Withdraw</em>
                             </a>
                         </li>
+                        <li>
+                            <a class="s-sidebar__nav-link {{ request()->routeIs('post.index') ? 'active' : '' }}" href="{{ route('post.index') }}">
+                                <i class="fa-solid fa-signs-post text-warning"></i><em
+                                    class="text-white">Posts</em>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="s-sidebar__nav-link {{ request()->routeIs('blog.index') ? 'active' : '' }}" href="{{ route('blog.index') }}">
+                                <i class="fa-solid fa-blog text-warning"></i><em
+                                    class="text-white">Blogs</em>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>
