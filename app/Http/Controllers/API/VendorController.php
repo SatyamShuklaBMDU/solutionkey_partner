@@ -59,7 +59,7 @@ class VendorController extends Controller
                 'profession' => 'nullable|string|max:255',
                 'area_of_interest' => 'nullable|string|max:255',
                 'phone_number' => 'string|max:20',
-                'email' => 'nullable|string|email|max:255|unique:vendors,email',
+                'email' => 'nullable|string|email|max:255|unique:vendors,email,'.$vendor->id,
                 'experience' => 'nullable|string|max:255',
                 'current_job' => 'nullable|string|max:255',
                 'charge_per_minute_for_audio_call' => 'nullable|numeric',
