@@ -21,7 +21,7 @@ class VendorController extends Controller
                 'name' => 'required|string|max:255',
                 'phone_number' => 'required|string|min:10|unique:vendors,phone_number',
                 'password' => 'required|string|min:4',
-                'email' => 'required|email|unique:vendors,email'
+                'email' => 'required|email|unique:vendors,email',
             ]);
             if ($validator->fails()) {
                 $response = ['status' => false];
@@ -59,7 +59,7 @@ class VendorController extends Controller
                 'profession' => 'nullable|string|max:255',
                 'area_of_interest' => 'nullable|string|max:255',
                 'phone_number' => 'string|max:20',
-                'email' => 'nullable|string|email|max:255|unique:vendors,email,'.$vendor->id,
+                'email' => 'nullable|string|email|max:255|unique:vendors,email,' . $vendor->id,
                 'experience' => 'nullable|string|max:255',
                 'current_job' => 'nullable|string|max:255',
                 'charge_per_minute_for_audio_call' => 'nullable|numeric',
@@ -88,14 +88,14 @@ class VendorController extends Controller
                 $profilePicture->move(public_path('profile_pictures'), $profilePictureName);
                 $vendor->profile_picture = 'profile_pictures/' . $profilePictureName;
             }
-    
+
             if ($request->hasFile('cover_picture')) {
                 $coverPicture = $request->file('cover_picture');
                 $coverPictureName = 'cover_' . time() . '.' . $coverPicture->getClientOriginalExtension();
                 $coverPicture->move(public_path('cover_pictures'), $coverPictureName);
                 $vendor->cover_picture = 'cover_pictures/' . $coverPictureName;
             }
-    
+
             $vendor->update($request->only([
                 'name',
                 'highest_qualification',
@@ -130,11 +130,11 @@ class VendorController extends Controller
     public function vendorDetails(Request $request)
     {
         $login = Auth::user();
-        if ($login) {
-            return response()->json(['Vendor' => $login, 'message' => 'Vendors All Details'], Response::HTTP_OK);
-        } else {
+        if (!$login) {
             return response()->json(['message' => 'Not Authenticated Vendor'], Response::HTTP_UNAUTHORIZED);
         }
+        $login->status = $login->status ? 'Online' : 'Offline';
+        return response()->json(['Vendor' => $login, 'message' => 'Vendors All Details'], Response::HTTP_OK);
     }
     public function login(Request $request)
     {
