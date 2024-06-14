@@ -14,6 +14,7 @@ class PostController extends Controller
 {
     public function store(Request $request)
     {
+        $postUrl = "https://bmdublog.com/SolutionkeyPartner/public/";
         try {
             $login = Auth::user();
             $validator = Validator::make($request->all(), [
@@ -37,6 +38,7 @@ class PostController extends Controller
                 $post->post_image = $imageName;
             }
             $post->save();
+            $post->post_image = $postUrl . 'images/posts/' . $post->post_image;
             return response()->json(['message' => 'Post created successfully', 'post' => $post], Response::HTTP_CREATED);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Internal Server Error'], Response::HTTP_INTERNAL_SERVER_ERROR);
@@ -81,10 +83,12 @@ class PostController extends Controller
         try {
             $posts = Post::with('vendor')->get();
             $posturl = "https://bmdublog.com/SolutionkeyPartner/public/images/posts/";
-            $postinarray = $posts->map(function ($post) use ($posturl) {
+            $vendorProfile = "https://bmdublog.com/SolutionkeyPartner/public/";
+            $postinarray = $posts->map(function ($post) use ($posturl,$vendorProfile) {
                 return [
                     'id' => $post->id,
                     'vendor_name' => $post->vendor->name,
+                    'vendor_profile' => $post->vendor->profile_picture ? $vendorProfile . $post->vendor->profile_picture : '',
                     'post_image' => $posturl . $post->post_image,
                     'content' => $post->content,
                     'created_at' => $post->created_at,

@@ -9,7 +9,6 @@ class Post extends Model
 {
     use HasFactory;
     protected $table = "posts";
-
     public function vendor()
     {
         return $this->belongsTo(Admin::class,'vendor_id');
