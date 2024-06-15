@@ -150,15 +150,26 @@ class VendorController extends Controller
                 }
                 return response()->json($response, Response::HTTP_BAD_REQUEST);
             }
-            if (Auth::guard('admins')->attempt(['phone_number' => $request->phone_number, 'password' => $request->password])) {
-                $vendor = Auth::guard('admins')->user();
-                $token = $vendor->createToken('VendorAppToken')->plainTextToken;
-                return response()->json(['message' => 'Login Successfull.', 'token' => $token, 'id' => $vendor->id], Response::HTTP_OK);
-            } else {
-                throw ValidationException::withMessages([
-                    'phone_number' => ['The provided credentials are incorrect.'],
-                ]);
+            $user = \App\Models\Admin::where('phone_number', $request->phone_number)->first();
+            if (!$user) {
+                return response()->json(['phone_number' => 'The provided credentials are incorrect.'], Response::HTTP_BAD_REQUEST);
             }
+            if ($user->account_status == 0) {
+                return response()->json(['message' => 'User account is pending.'], Response::HTTP_BAD_REQUEST);
+            } elseif ($user->account_status == 2) {
+                return response()->json(['message' => 'User account is suspended.'], Response::HTTP_BAD_REQUEST);
+            } elseif ($user->account_status == 1) {
+                if (Auth::guard('admins')->attempt(['phone_number' => $request->phone_number, 'password' => $request->password])) {
+                    $vendor = Auth::guard('admins')->user();
+                    $token = $vendor->createToken('VendorAppToken')->plainTextToken;
+                    return response()->json(['message' => 'Login Successful.', 'token' => $token, 'id' => $vendor->id], Response::HTTP_OK);
+                } else {
+                    return response()->json(['phone_number' => 'The provided credentials are incorrect.'], Response::HTTP_BAD_REQUEST);
+                }
+            } else {
+                return response()->json(['message' => 'Invalid account status.'], Response::HTTP_BAD_REQUEST);
+            }
+
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
         }

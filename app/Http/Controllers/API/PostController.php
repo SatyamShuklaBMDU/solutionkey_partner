@@ -81,7 +81,33 @@ class PostController extends Controller
     public function allposts(Request $request)
     {
         try {
-            $posts = Post::with('vendor')->get();
+            $posts = Post::with('vendor')->latest()->get();
+            $posturl = "https://bmdublog.com/SolutionkeyPartner/public/images/posts/";
+            $vendorProfile = "https://bmdublog.com/SolutionkeyPartner/public/";
+            $postinarray = $posts->map(function ($post) use ($posturl,$vendorProfile) {
+                return [
+                    'id' => $post->id,
+                    'vendor_name' => $post->vendor->name,
+                    'vendor_profile' => $post->vendor->profile_picture ? $vendorProfile . $post->vendor->profile_picture : '',
+                    'post_image' => $posturl . $post->post_image,
+                    'content' => $post->content,
+                    'created_at' => $post->created_at,
+                    'updated_at' => $post->updated_at,
+                ];
+            })->toArray();
+            return response()->json(['message' => "All Posts", 'posts' => $postinarray], Response::HTTP_OK);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['error' => 'Resource not found'], Response::HTTP_NOT_FOUND);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Internal Server Error'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+    public function specificVendorPost(Request $request)
+    {
+        try {
+            $login = Auth::id();
+            // dd($login);
+            $posts = Post::where('vendor_id',$login)->with('vendor')->latest()->get();
             $posturl = "https://bmdublog.com/SolutionkeyPartner/public/images/posts/";
             $vendorProfile = "https://bmdublog.com/SolutionkeyPartner/public/";
             $postinarray = $posts->map(function ($post) use ($posturl,$vendorProfile) {
