@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\BlogController;
+use App\Http\Controllers\API\CommentController;
 use App\Http\Controllers\API\FeedController;
 use App\Http\Controllers\API\NotificationController;
 use App\Http\Controllers\API\PostController;
@@ -43,5 +44,8 @@ Route::prefix('vendor')->group(function () {
     Route::get('feed', [FeedController::class, 'index'])->middleware('auth:sanctum');
     Route::get('notifications',[NotificationController::class,'getNotify'])->middleware('auth:sanctum');
     Route::post('/get-review',[ReviewController::class,'index'])->middleware('auth:sanctum');
+    Route::post('review-reply',[ReviewController::class,'store'])->middleware('auth:sanctum');
+    Route::post('get-comments',[CommentController::class,'index'])->middleware('auth:sanctum');
+    Route::post('comment-reply',[CommentController::class,'store'])->middleware('auth:sanctum');
     // Route::post('/schedule_slots', [SlotController::class, 'scheduleSlot']);
 });
