@@ -95,7 +95,6 @@ class VendorController extends Controller
                 $coverPicture->move(public_path('cover_pictures'), $coverPictureName);
                 $vendor->cover_picture = 'cover_pictures/' . $coverPictureName;
             }
-
             $vendor->update($request->only([
                 'name',
                 'highest_qualification',
@@ -118,7 +117,15 @@ class VendorController extends Controller
                 'status',
             ]));
             $vendor->save();
-            return response()->json(['message' => 'Vendor details updated successfully', 'data' => $vendor], Response::HTTP_OK);
+            $baseUrl = "https://bmdublog.com/SolutionkeyPartner/public/";
+            $responseData = $vendor->toArray();
+            if ($vendor->profile_picture) {
+                $responseData['profile_picture_url'] = $baseUrl . $vendor->profile_picture;
+            }
+            if ($vendor->cover_picture) {
+                $responseData['cover_picture_url'] = $baseUrl . $vendor->cover_picture;
+            }    
+            return response()->json(['message' => 'Vendor details updated successfully', 'data' => $responseData], Response::HTTP_OK);
         } catch (ModelNotFoundException $e) {
             return response()->json(['message' => 'Vendor not found'], Response::HTTP_NOT_FOUND);
         } catch (ValidationException $e) {
