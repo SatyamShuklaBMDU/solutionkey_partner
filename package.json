@@ -124,6 +124,7 @@
     "supports-preserve-symlinks-flag": "^1.0.0",
     "thenify": "^3.3.1",
     "thenify-all": "^1.6.0",
+    "three": "^0.166.1",
     "to-regex-range": "^5.0.1",
     "ts-interface-checker": "^0.1.13",
     "update-browserslist-db": "^1.0.13",

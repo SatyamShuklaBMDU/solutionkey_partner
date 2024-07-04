@@ -30,7 +30,6 @@ class VendorController extends Controller
                 }
                 return response()->json($response, Response::HTTP_BAD_REQUEST);
             }
-
             $randomDigits = mt_rand(10000, 99999);
             $vendorid = 'VEND' . $randomDigits;
             $vendor = new Admin();
