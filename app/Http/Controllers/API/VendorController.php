@@ -20,7 +20,7 @@ class VendorController extends Controller
             $validator = Validator::make($request->all(), [
                 'name' => 'required|string|max:255',
                 'phone_number' => 'required|string|min:10|unique:vendors,phone_number',
-                'password' => 'required|string|min:4',
+                'password' => 'required|string|min:6',
                 'email' => 'required|email|unique:vendors,email',
             ]);
             if ($validator->fails()) {
@@ -198,15 +198,9 @@ class VendorController extends Controller
         if (Auth::user()) {
             if (Hash::check($request->password, $pass)) {
                 $request->user()->tokens()->delete();
-                return response()->json([
-                    'message' => 'Logout successful',
-                    'status' => 'success',
-                ], Response::HTTP_OK);
+                return response()->json(['message' => 'Logout successful','status' => 'success',], Response::HTTP_OK);
             } else {
-                return response()->json([
-                    'message' => 'Invalid password',
-                    'status' => false,
-                ], Response::HTTP_BAD_REQUEST);
+                return response()->json(['message' => 'Invalid password','status' => false], Response::HTTP_BAD_REQUEST);
             }
         } else {
             return response()->json([
